@@ -11,9 +11,7 @@ class Merchants:
     def __init__(self, transport: Transport) -> None:
         self._t = transport
 
-    def items(
-        self, merchant_id: str, *, latitude: float, longitude: float
-    ) -> list[JsonObject]:
+    def items(self, merchant_id: str, *, latitude: float, longitude: float) -> list[JsonObject]:
         """Menu items with prices and choice groups, as the checkout page reads them."""
         payload = self._t.get(
             endpoints.MERCHANT_ITEMS.format(merchant_id=merchant_id),

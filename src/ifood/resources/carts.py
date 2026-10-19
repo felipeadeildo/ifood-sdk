@@ -75,6 +75,11 @@ class Carts:
     def _session_account(self) -> Account | JsonObject | None:
         return self._account() if self._account is not None else None
 
+    def get(self, cart_id: str) -> CartResponse:
+        """Read a cart back by id. Measured 200, and the snapshot carries the signature."""
+        payload = self._t.get(endpoints.CART_BY_ID.format(cart_id=cart_id))
+        return CartResponse.model_validate(payload)
+
     def create(self, payload: JsonObject) -> CartResponse:
         """`payload` must carry merchant, address, items (with `subItems`), delivery,
         account and source. See `docs/cart.md` for the shape measured on the wire."""
