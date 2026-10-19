@@ -18,6 +18,14 @@ def session_status() -> dict[str, Any]:
     }
 
 
+def search_addresses(query: str) -> list[dict[str, Any]]:
+    return runtime.get_client().locations.search(query)
+
+
+def save_address(address: dict[str, Any]) -> dict[str, Any]:
+    return runtime.get_client().customers.add_address(address).model_dump(by_alias=True)
+
+
 def list_addresses() -> list[dict[str, Any]]:
     client = runtime.get_client()
     return [address.model_dump(by_alias=True) for address in client.customers.addresses()]

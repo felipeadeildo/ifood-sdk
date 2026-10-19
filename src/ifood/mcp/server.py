@@ -41,6 +41,16 @@ def build_server() -> MCPServer[Any]:
         return ops.list_addresses()
 
     @mcp.tool()
+    def search_addresses(query: str) -> list[dict[str, Any]]:
+        """Turn a typed address into candidate places with coordinates."""
+        return ops.search_addresses(query)
+
+    @mcp.tool()
+    def save_address(address: dict[str, Any]) -> dict[str, Any]:
+        """Save a new delivery address. Needs the fields the web client sends."""
+        return ops.save_address(address)
+
+    @mcp.tool()
     def list_orders(size: int = 5) -> list[dict[str, Any]]:
         """Recent orders, newest first."""
         return ops.list_orders(size)

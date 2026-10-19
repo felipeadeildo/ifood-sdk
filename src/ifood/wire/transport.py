@@ -89,13 +89,17 @@ class Transport:
         json_body: object | None = None,
         params: Mapping[str, str | int | float | bool] | None = None,
         absolute_url: str | None = None,
+        extra_headers: Mapping[str, str] | None = None,
     ) -> Json:
         self._sync_cookies()
         for attempt in range(EDGE_RETRIES + 1):
+            headers = self.headers()
+            if extra_headers:
+                headers.update(extra_headers)
             response = self._client.request(
                 method,
                 absolute_url or path,
-                headers=self.headers(),
+                headers=headers,
                 json=json_body,
                 params=params,
             )
@@ -118,8 +122,11 @@ class Transport:
         *,
         params: Mapping[str, str | int | float | bool] | None = None,
         absolute_url: str | None = None,
+        extra_headers: Mapping[str, str] | None = None,
     ) -> Json:
-        return self.request("GET", path, params=params, absolute_url=absolute_url)
+        return self.request(
+            "GET", path, params=params, absolute_url=absolute_url, extra_headers=extra_headers
+        )
 
     def post(self, path: str, *, json_body: object) -> Json:
         return self.request("POST", path, json_body=json_body)

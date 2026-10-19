@@ -38,6 +38,8 @@ def test_tools_are_listed() -> None:
     assert run(names()) == [
         "session_status",
         "list_addresses",
+        "search_addresses",
+        "save_address",
         "list_orders",
         "get_order",
         "track_order",

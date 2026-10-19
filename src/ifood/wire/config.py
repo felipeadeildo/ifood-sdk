@@ -48,6 +48,14 @@ class WireProfile:
             "service",
         )
     )
+    address_application_key: WireConstant = field(
+        default=WireConstant(
+            "x-application-key",
+            "Zw@W#GbKp@UyXMYcBTsZFavt3",
+            "ADDRESS_X_APPLICATION_KEY in bundle config",
+            "service",
+        )
+    )
     device_model: WireConstant = field(
         default=WireConstant("x-device-model", "Linux Chrome", "captured request", "stable")
     )

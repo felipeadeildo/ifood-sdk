@@ -60,6 +60,14 @@ def build_app() -> FastAPI:
     def track_order(order_id: str) -> dict[str, Any]:
         return ops.track_order(order_id)
 
+    @app.get("/addresses/search", dependencies=guarded)
+    def search_addresses(query: str) -> list[dict[str, Any]]:
+        return ops.search_addresses(query)
+
+    @app.post("/addresses", dependencies=guarded)
+    def save_address(address: dict[str, Any]) -> dict[str, Any]:
+        return ops.save_address(address)
+
     @app.get("/addresses", dependencies=guarded)
     def list_addresses() -> list[dict[str, Any]]:
         return ops.list_addresses()

@@ -36,6 +36,8 @@ SEARCH = "/v2/cardstack/search/results"
 
 # other hosts
 GEOCODE = "/location/v1/addresses:geocode"
+# Reverse geocode: assumed from the module name, never seen on the wire.
+REVERSE_GEOCODE = "/location/v1/coordinates:reverse-geocode"
 MERCHANT_DETAIL = "/v1/merchants/{merchant_id}"
 
 

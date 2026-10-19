@@ -18,6 +18,7 @@ from .models import AccountInfo, Address, BagItem, Order, PreparedCart
 from .resources.cart_build import Account
 from .resources.carts import Carts
 from .resources.customers import Customers
+from .resources.locations import Locations
 from .resources.merchants import Merchants
 from .resources.orders import Orders
 from .resources.vouchers import Vouchers
@@ -60,6 +61,7 @@ class Client:
         self.transport = Transport(resolved, profile=profile or DEFAULT_PROFILE)
         self.auth = Auth(self.transport)
         self.customers = Customers(self.transport)
+        self.locations = Locations(self.transport)
         self.orders = Orders(self.transport)
         self.merchants = Merchants(self.transport)
         self.carts = Carts(self.transport, account=self.cart_account)
