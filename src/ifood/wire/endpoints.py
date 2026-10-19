@@ -23,6 +23,7 @@ ORDER_REORDER = "/v1/customers/me/orders/{order_id}/reorder"
 
 # cart (measured; writes require a browser-originated session)
 CART_CREATE = "/v2/carts"
+CART_BY_ID = "/v2/carts/{cart_id}"
 CART_CHECKOUT = "/v2/carts/{cart_id}/checkout"
 CART_PAYMENT_METHOD = "/v2/carts/{cart_id}/paymentMethod"
 CART_VOUCHER = "/v2/carts/{cart_id}/voucher"  # current flow, same base as the cart
@@ -39,6 +40,9 @@ GEOCODE = "/location/v1/addresses:geocode"
 # Reverse geocode: assumed from the module name, never seen on the wire.
 REVERSE_GEOCODE = "/location/v1/coordinates:reverse-geocode"
 MERCHANT_DETAIL = "/v1/merchants/{merchant_id}"
+# Menu items as the checkout page reads them. Measured 200 with a fresh session,
+# while the grouped catalog route stays behind PerimeterX.
+MERCHANT_ITEMS = "/v1/customers/me/merchants/{merchant_id}/items"
 
 
 def bff_path(path: str) -> str:

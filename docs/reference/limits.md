@@ -24,10 +24,14 @@ fixed TTL, so the client reloads the jar from disk before each call and surfaces
 
 ## Menu and search
 
-Both sit behind PerimeterX and fail with `EdgeBlocked` unless the session was minted by a
-browser. The mobile catalog route answers `Request integrity check failed`, so it needs the
-app. A 403 at the edge does not prove a route exists, so menu and search stay marked as
-unknown.
+The grouped catalog (`/v1/merchants/restaurant/{id}/catalog`) and search
+(`/v2/cardstack/search/results`) sit behind PerimeterX and fail with `EdgeBlocked`.
+
+Menu items are reachable another way: `GET /v1/customers/me/merchants/{id}/items` returns
+the item list with prices and choice groups, and answers `200` with a fresh session. It
+does not carry the section grouping that the catalog does.
+
+The mobile catalog route answers `Request integrity check failed`, so it needs the app.
 
 ## Checkout
 
