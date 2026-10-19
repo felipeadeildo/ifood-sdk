@@ -17,6 +17,11 @@
 
 </div>
 
+> **Not affiliated with iFood.** This is an independent, unofficial client, built for
+> study and personal use on your own account. It does not bypass authentication: you log
+> in with your own phone and the code iFood sends you. Read the
+> [disclaimer](docs/disclaimer.md) before using it.
+
 ```bash
 git clone https://github.com/felipeadeildo/ifood-sdk
 cd ifood-sdk && uv sync --all-groups
@@ -58,6 +63,12 @@ uv run zensical serve     # local site
 
 Guides live in `docs/`: `install`, `login`, `orders`, `cart`, plus `reference` for
 endpoints, errors and limits.
+
+## Legal
+
+Unofficial project, not affiliated with, endorsed by, or supported by iFood. Intended for
+study and interoperability on your own account. The full text, including the limits of the
+warranty, is in [docs/disclaimer.md](docs/disclaimer.md).
 
 ## Development
 

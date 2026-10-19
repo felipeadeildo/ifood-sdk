@@ -29,6 +29,7 @@ nav = [
   { "Project" = [
       "architecture.md",
       "roadmap.md",
+      "disclaimer.md",
   ] },
 ]
 

@@ -9,6 +9,11 @@ git clone https://github.com/felipeadeildo/ifood-sdk
 cd ifood-sdk && uv sync --all-groups
 ```
 
+!!! warning "Not affiliated with iFood"
+
+    This is an independent client, built for study and personal use on your own account.
+    It does not bypass authentication. Read the [disclaimer](disclaimer.md) before using it.
+
 ```python
 import ifood
 
