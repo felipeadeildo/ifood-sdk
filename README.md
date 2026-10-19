@@ -3,8 +3,12 @@
 Unofficial Python client for the iFood consumer API. The parts that work are measured
 against the real service, and the parts that do not are documented instead of guessed.
 
+Docs: https://felipeadeildo.github.io/ifood-sdk
+
 ```bash
-uv add ifood-sdk     # not published yet: use uv sync --all-groups in this repo
+git clone https://github.com/felipeadeildo/ifood-sdk
+cd ifood-sdk
+uv sync --all-groups
 ```
 
 ```python

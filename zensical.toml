@@ -1,6 +1,9 @@
 [project]
 site_name = "ifood-sdk"
-site_url = "https://example.com/ifood-sdk"
+site_url = "https://felipeadeildo.github.io/ifood-sdk"
+repo_url = "https://github.com/felipeadeildo/ifood-sdk"
+repo_name = "felipeadeildo/ifood-sdk"
+edit_uri = "edit/main/docs/"
 site_description = "Unofficial toolkit for the iFood consumer API"
 site_author = "ifood-sdk"
 copyright = "Unofficial project. Not affiliated with iFood."
@@ -47,3 +50,7 @@ primary = "teal"
 accent = "teal"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
+
+
+[project.theme.icon]
+repo = "fontawesome/brands/github"

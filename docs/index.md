@@ -1,10 +1,12 @@
 # ifood-sdk
 
 Unofficial Python client for the iFood consumer API, built from measurements of the real
-service rather than from documentation guesses.
+service rather than from documentation guesses. Source and issues live in
+[felipeadeildo/ifood-sdk](https://github.com/felipeadeildo/ifood-sdk).
 
 ```bash
-uv add ifood-sdk
+git clone https://github.com/felipeadeildo/ifood-sdk
+cd ifood-sdk && uv sync --all-groups
 ```
 
 ```python
