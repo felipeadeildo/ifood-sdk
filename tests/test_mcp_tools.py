@@ -43,6 +43,7 @@ def test_tools_are_listed() -> None:
         "list_orders",
         "get_order",
         "track_order",
+        "merchant_items",
         "merchant_lookup",
         "repeat_last_order",
     ]

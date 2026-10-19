@@ -86,6 +86,15 @@ class Carts:
         account and source. See `docs/cart.md` for the shape measured on the wire."""
         return CartResponse.model_validate(self._t.post(endpoints.CART_CREATE, json_body=payload))
 
+    def update_item(self, cart_id: str, item_id: str, payload: JsonObject) -> CartResponse:
+        """Replace one cart line. Measured 200 with quantity, options and note."""
+        result = self._t.request(
+            "PUT",
+            endpoints.CART_ITEM.format(cart_id=cart_id, item_id=item_id),
+            json_body=payload,
+        )
+        return CartResponse.model_validate(result)
+
     def set_payment_method(self, cart_id: str, payload: JsonObject) -> CartResponse:
         return CartResponse.model_validate(
             self._t.request(

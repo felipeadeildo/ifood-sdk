@@ -55,6 +55,10 @@ def track_order(order_id: str) -> dict[str, Any]:
     }
 
 
+def merchant_items(merchant_id: str, *, latitude: float, longitude: float) -> list[dict[str, Any]]:
+    return runtime.get_client().merchants.items(merchant_id, latitude=latitude, longitude=longitude)
+
+
 def merchant_lookup(merchant_id: str) -> dict[str, Any]:
     return runtime.get_client().merchants.get(merchant_id).model_dump(by_alias=True)
 

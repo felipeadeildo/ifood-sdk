@@ -68,6 +68,10 @@ def build_app() -> FastAPI:
     def save_address(address: dict[str, Any]) -> dict[str, Any]:
         return ops.save_address(address)
 
+    @app.get("/merchants/{merchant_id}/items", dependencies=guarded)
+    def merchant_items(merchant_id: str, latitude: float, longitude: float) -> list[dict[str, Any]]:
+        return ops.merchant_items(merchant_id, latitude=latitude, longitude=longitude)
+
     @app.get("/addresses", dependencies=guarded)
     def list_addresses() -> list[dict[str, Any]]:
         return ops.list_addresses()

@@ -1,7 +1,7 @@
 # ifood-sdk
 
-Unofficial Python client for the iFood consumer API, built from measurements of the real
-service rather than from documentation guesses. Source and issues live in
+Unofficial Python client for the iFood consumer API. Every route here was measured against
+the live service; where a route is unverified, the docs say so. Source and issues live in
 [felipeadeildo/ifood-sdk](https://github.com/felipeadeildo/ifood-sdk).
 
 ```bash
@@ -14,11 +14,11 @@ pip install "ifood-sdk[api]"   # plus the HTTP service
 import ifood
 
 client = ifood.Client(phone="+55 11 90000-0000")
-client.login()              # the code arrives on WhatsApp
-client.verify("123456")     # session saved to ~/.config/ifood-sdk/session.json
+client.login()               # the code arrives on WhatsApp
+client.verify("123456")      # session saved under ~/.config/ifood-sdk/
 
-for order in client.orders.recent(3):
-    print(order.number, order.status, order.merchant.name)
+order = client.orders.recent(1)[0]
+print(order.number, order.status, order.merchant.name)
 ```
 
 !!! warning "Not affiliated with iFood"
@@ -34,32 +34,36 @@ for order in client.orders.recent(3):
 | tools for an agent | `ifood-sdk[mcp]` | `python -m ifood.mcp` |
 | an HTTP service | `ifood-sdk[api]` | `uvicorn ifood.api:build_app --factory` |
 
-All three share one implementation. The MCP server and the HTTP service call the same
-operations, so a fix in one lands in the other.
+All three share one implementation. The MCP tools and the HTTP routes call the same
+operations, so behavior cannot drift between them.
 
 ## What you can do
 
-- Log in with a phone number. No password exists on the web client.
-- Read the profile, list saved addresses, search places and save new addresses.
-- Read the order history, one order in detail, and its event timeline.
-- Repeat a past order by asking for it with the delivery coordinates.
-- Get the four digits the courier asks for.
-- Build and validate a cart payload locally, without spending a request.
+- Log in with a phone number and the code iFood sends. The web client has no password.
+- Read the profile, list saved addresses, search places, save a new address.
+- Read the menu of a merchant, with prices and choice groups.
+- Create a cart, change its items, set the payment method and place the order.
+- Read the order back, follow its event timeline and get the delivery code.
+- Repeat a past order with the coordinates of the delivery address.
 
 ## What it does not do
 
-Guarantee a session. Edge cookies last minutes, so a stale jar comes back as
-`EdgeBlocked` and the call has to wait for a fresh login. The client reloads the jar from
-disk, but it cannot mint one.
+- Serve the grouped catalog or the search results. Both sit behind PerimeterX and answer
+  `EdgeBlocked`.
+- Guarantee a session. Edge cookies last minutes, so an old jar comes back as `EdgeBlocked`
+  and the call has to wait for a fresh login.
+- Charge anything on its own. A Pix order stays `CREATED` until someone pays the QR.
 
-Serve the menu and the search from plain HTTP. Both sit behind PerimeterX and need the
-session that the browser created. See [Limits](reference/limits.md).
+## How the project works
+
+Routes carry a status in `ifood.wire.endpoints`: `measured` when a live call confirmed the
+shape, `bundle` when it comes from the web bundle and was never called, `unknown` when it is
+a guess. The [limits page](reference/limits.md) states what each one needs, so a call fails
+with a reason instead of a surprise.
 
 ## Next steps
 
-- [Install](guides/install.md) with the extras you need.
-- [Log in](guides/login.md) and keep the session.
-- [Read orders](guides/orders.md) and repeat the last one.
-- [Serve MCP](guides/mcp.md) to an agent.
-- [Serve HTTP](guides/api.md) to other machines.
-- [Client reference](reference/client.md) for every method.
+- [Quickstart](guides/quickstart.md): login to order in one script.
+- [Cart and checkout](guides/cart.md): the write path, step by step.
+- [MCP server](guides/mcp.md): the same operations as agent tools.
+- [Client reference](reference/client.md): every method and model.

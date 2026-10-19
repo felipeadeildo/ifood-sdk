@@ -21,7 +21,7 @@ That speaks MCP over stdio, which is how a local host launches it. The tools:
 | `repeat_last_order` | validated cart payload plus what changed |
 
 `repeat_last_order` is the case the project exists for. It builds the payload; sending it
-happens in the app, because the platform refuses writes from anything but the browser that
+happens in the app, because the catalog and search routes refuse anything but the browser that
 created the session.
 
 ## Over HTTP, with a token

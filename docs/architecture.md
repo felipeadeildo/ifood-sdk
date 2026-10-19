@@ -32,7 +32,7 @@ thin wrappers over them.
 
 ## Session model
 
-A browser mints the edge cookies once; the SDK reuses them for reads. Writes need the
+A browser mints the edge cookies once; the SDK reuses them for reads and writes. Writes need a
 browser that minted the session, because Cloudflare challenges any other TLS. That is why
 the surfaces stop at reading and at building a payload, and why a session keeper is a
 requirement for anyone who wants to write, not a convenience.

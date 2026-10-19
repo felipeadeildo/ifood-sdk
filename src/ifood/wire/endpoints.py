@@ -25,6 +25,7 @@ ORDER_REORDER = "/v1/customers/me/orders/{order_id}/reorder"
 CART_CREATE = "/v2/carts"
 CART_BY_ID = "/v2/carts/{cart_id}"
 CART_CHECKOUT = "/v2/carts/{cart_id}/checkout"
+CART_ITEM = "/v2/carts/{cart_id}/items/{item_id}"
 CART_PAYMENT_METHOD = "/v2/carts/{cart_id}/paymentMethod"
 CART_VOUCHER = "/v2/carts/{cart_id}/voucher"  # current flow, same base as the cart
 CART_VOUCHER_LEGACY = "/v1/carts/{cart_id}/voucher"  # WSV3 base, bundle only

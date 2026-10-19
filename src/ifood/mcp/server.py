@@ -66,6 +66,11 @@ def build_server() -> MCPServer[Any]:
         return ops.track_order(order_id)
 
     @mcp.tool()
+    def merchant_items(merchant_id: str, latitude: float, longitude: float) -> list[dict[str, Any]]:
+        """Menu items with prices and choice groups for one merchant."""
+        return ops.merchant_items(merchant_id, latitude=latitude, longitude=longitude)
+
+    @mcp.tool()
     def merchant_lookup(merchant_id: str) -> dict[str, Any]:
         """Merchant name, status and minimum order. Needs no session."""
         return ops.merchant_lookup(merchant_id)
