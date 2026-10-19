@@ -1,6 +1,8 @@
 # Cart
 
 The builder is pure: give it ids already resolved against the current catalog.
+Sending the payload works while the session is fresh, and returns the cart id with a
+signed snapshot.
 
 ```python
 from ifood import Account, CartItem, SubItem

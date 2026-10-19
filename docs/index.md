@@ -48,12 +48,12 @@ operations, so a fix in one lands in the other.
 
 ## What it does not do
 
-Place the order. `POST` and `PUT` on the iFood web API answer a Cloudflare challenge to any
-client whose TLS did not mint the session, and the mobile API requires device attestation.
-The client stops at a validated payload. See [Limits](reference/limits.md).
+Guarantee a session. Edge cookies last minutes, so a stale jar comes back as
+`EdgeBlocked` and the call has to wait for a fresh login. The client reloads the jar from
+disk, but it cannot mint one.
 
-Menu and search sit behind PerimeterX for the same kind of reason, so they are documented
-as unavailable from plain HTTP.
+Serve the menu and the search from plain HTTP. Both sit behind PerimeterX and need the
+session that the browser created. See [Limits](reference/limits.md).
 
 ## Next steps
 

@@ -1,21 +1,32 @@
 # Limits
 
-## Writes need the browser that minted the session
+## Writes work while the session is fresh
 
-`POST` and `PUT` on the BFF return `403 cf-mitigated: challenge` for any client whose TLS
-did not mint the session. Measured with `httpx`, `curl_cffi` (chrome, chrome131) and
-`tls_client` (chrome_120), all using a valid jar, the browser user agent, `sec-ch-ua`,
-and the same origin. Reads on the same jar keep working.
+An earlier version of this page said writes need the browser that minted the session.
+That was wrong, and the mistake is documented here on purpose.
 
-The mobile API is not an escape: its routes answer `Request integrity check failed`, and
-the app carries Play Integrity, which is device attestation rather than a key in the
-binary.
+What happened: writes were tested against a jar that had been open for about forty
+minutes. Reads still worked, `POST` returned `403 cf-mitigated: challenge`, and the
+conclusion was "the edge blocks writes". With a session minted minutes earlier, the same
+`curl` `POST /site-api/v2/carts` returned `201` and the browser showed the cart as its own.
+The 403 measured session degradation, not the HTTP method.
 
-Consequences:
+Measured now, with a fresh jar:
 
-- the SDK does not promise writes, and no test claims to write offline;
-- `EdgeBlocked` is the honest result, and it names the vendor;
-- a cart can be built and validated locally, but placing the order is a separate decision.
+| Call | Result |
+|---|---|
+| `GET /site-api/v1/customers/me` | `200` |
+| `POST /site-api/v2/carts` with the payload from a real order | `201`, cart id and signature returned |
+| `POST ca-marketplace.ifood.com.br/v2/carts` with the same JWT | `400` from validation, so the mobile host accepts the token |
+
+What still holds:
+
+- the useful life of the edge cookies is minutes, so a long-running process must be able to
+  reload the jar from disk;
+- `EdgeBlocked` remains the honest error when the session is stale, and it names the vendor;
+- the mobile catalog route answers `Request integrity check failed`, so that specific route
+  still needs the app;
+- checkout over HTTP was not re-verified after this correction.
 
 ## Session lifetime
 
