@@ -52,3 +52,9 @@ Each fact in this documentation names how it was established. An endpoint marked
 was seen answering on the wire. One marked unknown was not, and the client either refuses
 it or raises the edge error instead of pretending. The capture files and the decompiled app
 live in `research/`, outside the published package.
+
+<div align="center" markdown>
+<a href="https://adeildo.dev"><img src="assets/cat.svg" width="44" alt="A cat asleep on a laptop, the adeildo.dev logo"></a>
+
+<sub>Brought to you by <a href="https://adeildo.dev">adeildo.dev</a></sub>
+</div>

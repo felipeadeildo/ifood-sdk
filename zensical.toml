@@ -33,6 +33,8 @@ nav = [
 ]
 
 [project.theme]
+logo = "assets/logo.svg"
+favicon = "assets/logo.svg"
 features = ["navigation.sections", "navigation.top", "content.code.copy"]
 
 # Light

@@ -1,14 +1,25 @@
+<div align="center">
+
+<img src="docs/assets/logo.svg" width="72" height="72" alt="" />
+
 # ifood-sdk
 
-Unofficial Python client for the iFood consumer API. The parts that work are measured
-against the real service, and the parts that do not are documented instead of guessed.
+**Unofficial Python client for the iFood consumer API.**
 
-Docs: https://felipeadeildo.github.io/ifood-sdk
+[![Python 3.14](https://img.shields.io/badge/python-3.14-0f766e?style=flat-square)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0f766e?style=flat-square)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-felipeadeildo.github.io-0f766e?style=flat-square)](https://felipeadeildo.github.io/ifood-sdk)
+[![Unofficial](https://img.shields.io/badge/status-unofficial-64748b?style=flat-square)](#)
+
+<br />
+
+<img src="docs/assets/og.png" width="820" alt="The ifood-sdk banner: the package name, what it does, and the command to clone it." />
+
+</div>
 
 ```bash
 git clone https://github.com/felipeadeildo/ifood-sdk
-cd ifood-sdk
-uv sync --all-groups
+cd ifood-sdk && uv sync --all-groups
 ```
 
 ```python
@@ -58,3 +69,12 @@ uv run prek run --all-files
 `prek` runs ruff, ty and pytest from the project's own dependency group, so the machine
 and CI use the same versions. Layout: `packages/sdk` is the client; `research` holds the
 captures and the decompiled app, and is not versioned.
+
+
+<br />
+
+<div align="center">
+<a href="https://adeildo.dev"><img src="https://adeildo.dev/assets/images/cat.svg" width="44" alt="A cat asleep on a laptop, the adeildo.dev logo"></a>
+<br>
+<sub>Brought to you by <a href="https://adeildo.dev">adeildo.dev</a></sub>
+</div>
