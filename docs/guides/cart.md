@@ -26,4 +26,23 @@ validates locally and spends no network call.
 and `delivery.mode` exists. Mixing them returns `CART-007`, which is why the version is a
 required argument.
 
-Sending it is a different matter: see [limits](../reference/limits.md).
+## Send it
+
+```python
+cart = client.carts.create(payload)      # 201, returns the snapshot and the signature
+print(cart.cart.total, cart.signature)
+```
+
+Sending works while the session is fresh. A stale jar comes back as `EdgeBlocked`; the
+reason is the age of the session, not the method.
+
+## Read it back and place the order
+
+```python
+cart = client.carts.get(cart_id)
+order = client.carts.place_order(cart_id, cpf_cnpj="000.000.000-00")
+print(order.order_id, order.pix_qr_code)
+```
+
+`place_order` reads the cart, builds the 25 KB checkout body and sends it. The order stays
+`CREATED` until the Pix is paid, so this call does not charge anything.
