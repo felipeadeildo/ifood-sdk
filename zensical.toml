@@ -41,16 +41,16 @@ features = ["navigation.sections", "navigation.top", "content.code.copy"]
 # Light
 [[project.theme.palette]]
 scheme = "default"
-primary = "teal"
-accent = "teal"
+primary = "green"
+accent = "green"
 toggle.icon = "lucide/sun"
 toggle.name = "Switch to dark mode"
 
 # Dark
 [[project.theme.palette]]
 scheme = "slate"
-primary = "teal"
-accent = "teal"
+primary = "green"
+accent = "green"
 toggle.icon = "lucide/moon"
 toggle.name = "Switch to light mode"
 

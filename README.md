@@ -6,14 +6,10 @@
 
 **Unofficial Python client for the iFood consumer API.**
 
-[![Python 3.14](https://img.shields.io/badge/python-3.14-0f766e?style=flat-square)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/license-MIT-0f766e?style=flat-square)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-felipeadeildo.github.io-0f766e?style=flat-square)](https://felipeadeildo.github.io/ifood-sdk)
+[![Python 3.14](https://img.shields.io/badge/python-3.14-0e3b2e?style=flat-square)](https://python.org)
+[![License: MIT](https://img.shields.io/badge/license-MIT-0e3b2e?style=flat-square)](LICENSE)
+[![Docs](https://img.shields.io/badge/docs-felipeadeildo.github.io-0e3b2e?style=flat-square)](https://felipeadeildo.github.io/ifood-sdk)
 [![Unofficial](https://img.shields.io/badge/status-unofficial-64748b?style=flat-square)](#)
-
-<br />
-
-<img src="docs/assets/og.png" width="820" alt="The ifood-sdk banner: the package name, what it does, and the command to clone it." />
 
 </div>
 

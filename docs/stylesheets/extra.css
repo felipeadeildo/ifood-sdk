@@ -1,10 +1,10 @@
 /* Docs styling: restrained, one accent, readable line length. */
 
 :root {
-  --md-primary-fg-color: #0f766e;
-  --md-primary-fg-color--light: #14b8a6;
-  --md-primary-fg-color--dark: #115e59;
-  --md-accent-fg-color: #0d9488;
+  --md-primary-fg-color: #0e3b2e;
+  --md-primary-fg-color--light: #2f7a5f;
+  --md-primary-fg-color--dark: #072219;
+  --md-accent-fg-color: #1d7a58;
   --ifood-rule: color-mix(in srgb, currentColor 12%, transparent);
 }
 
