@@ -19,6 +19,7 @@ nav = [
       "guides/login.md",
       "guides/orders.md",
       "guides/cart.md",
+      "guides/mcp.md",
   ] },
   { "Reference" = [
       "reference/client.md",

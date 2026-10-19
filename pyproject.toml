@@ -19,6 +19,7 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 ifood-sdk = { workspace = true }
+ifood-mcp = { workspace = true }
 
 # lint & format (ruff)
 [tool.ruff]
@@ -58,7 +59,7 @@ possibly-missing-import = "warn"
 unused-ignore-comment = "warn"
 
 [tool.pytest.ini_options]
-testpaths = ["packages/sdk/tests"]
-pythonpath = ["packages/sdk", "packages/sdk/tests"]
+testpaths = ["packages/sdk/tests", "packages/mcp/tests"]
+pythonpath = ["packages/sdk", "packages/sdk/tests", "packages/mcp", "packages/mcp/src"]
 addopts = "-q"
 markers = ["live: talks to the real API (needs a session jar)"]

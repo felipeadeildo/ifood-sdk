@@ -3,7 +3,11 @@ name = "ifood-sdk"
 version = "0.1.0"
 description = "Unofficial Python SDK for the iFood consumer API"
 requires-python = ">=3.14"
-dependencies = ["httpx", "pydantic", "pydantic-settings"]
+dependencies = [
+    "httpx",
+    "pydantic",
+    "pydantic-settings",
+]
 
 [dependency-groups]
 dev = ["pytest", "ruff"]

@@ -15,6 +15,7 @@
 | Delivery code | `order.delivery_code` | four digits for the courier |
 | Reorder | `client.orders.reorder(order, latitude=…, longitude=…)` | previous bag |
 | Cart payload | `client.carts.build(merchant_id=…, …)` | validated, no network |
+| MCP server | `uv run --project packages/mcp python -m ifood_mcp` | seven tools, stdio or HTTP |
 
 ## Blocked
 
@@ -31,7 +32,7 @@
 | Item | Why | Effort |
 |---|---|---|
 | `ifood-api` | let other machines use the flows | small |
-| `ifood-mcp` | expose the flows to an agent | medium |
+| `ifood-mcp` (started) | seven tools, auth over HTTP; needs OAuth for public use | small |
 | E-mail OTP | second login path | needs measurement |
 | Social login | third login path | needs measurement |
 | Token refresh | sessions last 2 h | small, needs a live test |
