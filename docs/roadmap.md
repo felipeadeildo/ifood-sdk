@@ -7,7 +7,7 @@
 | OTP login | `Client(phone=...).login().verify(code)` | code arrives on WhatsApp, valid 60 s |
 | Session reuse | `Client()` | reads `~/.config/ifood-sdk/session.json` |
 | Profile | `client.customers.profile()` | |
-| Addresses | `client.customers.addresses()` | |
+| Addresses | `client.customers.addresses()`, `locations.search()`, `add_address()` | |
 | Merchant | `client.merchants.get(id)` | no auth needed |
 | Order history | `client.orders.recent(5)` | |
 | Order detail | `client.orders.get(id)` | status, fees, payments |

@@ -26,7 +26,8 @@ The code expires in 60 seconds and its key works once. `Client(phone=...)` accep
 
 | Resource | Methods |
 |---|---|
-| `client.customers` | `profile()`, `addresses()` |
+| `client.customers` | `profile()`, `addresses()`, `add_address()` |
+| `client.locations` | `search()` |
 | `client.orders` | `recent(size=5)`, `list(page, size)`, `get(id)`, `events(id)`, `reorder(order, latitude=, longitude=)`, `delivery_code(order)` |
 | `client.merchants` | `get(id)`, `catalog(id, latitude=, longitude=)` |
 | `client.carts` | `build(...)`, `create(payload)`, `set_payment_method`, `apply_voucher`, `remove_voucher`, `checkout(cart_id, payload)` |

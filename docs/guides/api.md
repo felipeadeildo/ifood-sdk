@@ -14,6 +14,8 @@ IFOOD_API_TOKEN=secret uv run uvicorn ifood.api:build_app --factory
 | `GET /orders/{id}` | one order with items, fees and payment |
 | `GET /orders/{id}/track` | status, arrival window, timeline, delivery code |
 | `GET /addresses` | saved addresses with coordinates |
+| `GET /addresses/search?query=` | place search with coordinates |
+| `POST /addresses` | save a new address |
 | `POST /orders/{id}/repeat` | validated cart payload plus what changed |
 
 Everything except `/health` requires `Authorization: Bearer <IFOOD_API_TOKEN>`. With the

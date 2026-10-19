@@ -17,6 +17,7 @@ nav = [
   { "Get started" = [
       "guides/install.md",
       "guides/login.md",
+      "guides/addresses.md",
       "guides/orders.md",
       "guides/cart.md",
       "guides/mcp.md",

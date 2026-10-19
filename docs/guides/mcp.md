@@ -12,6 +12,8 @@ That speaks MCP over stdio, which is how a local host launches it. The tools:
 |---|---|
 | `session_status` | whether the saved session works, token lifetime, edge cookies |
 | `list_addresses` | saved addresses with coordinates |
+| `search_addresses` | place search with coordinates |
+| `save_address` | save a new address |
 | `list_orders` | recent orders, newest first |
 | `get_order` | one order: status, merchant, items, fees, payment |
 | `track_order` | status, arrival window, event timeline, delivery code |

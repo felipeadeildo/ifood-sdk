@@ -11,6 +11,9 @@ Every route the SDK uses, tagged by how it was established.
 | `/v3/identity-providers/OTP/authentications` | POST | measured |
 | `/v1/customers/me` | GET | measured |
 | `/v1/customers/me/addresses` | GET | measured |
+| `/v1/customers/me/addresses` | POST | measured |
+| `/location/v1/addresses:geocode` (logistics host) | GET | measured |
+| `/location/v1/coordinates:reverse-geocode` | GET | unknown |
 | `/v4/customers/me/orders` | GET | measured |
 | `/v3/customers/me/orders/{id}` | GET | measured |
 | `/v1/customers/me/orders/{id}/events` | GET | measured |

@@ -40,7 +40,7 @@ operations, so a fix in one lands in the other.
 ## What you can do
 
 - Log in with a phone number. No password exists on the web client.
-- Read the profile and the saved addresses.
+- Read the profile, list saved addresses, search places and save new addresses.
 - Read the order history, one order in detail, and its event timeline.
 - Repeat a past order by asking for it with the delivery coordinates.
 - Get the four digits the courier asks for.
