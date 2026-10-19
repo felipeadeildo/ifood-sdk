@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "source": "evidence/cart-01, pedido real de 2026-10-19T03:36:39Z (Pix, R$ 31,89)",
+  "note": "Estrutura medida do checkout do web. Nenhum valor pessoal: só chaves, tipos e regras. CPF, QR do Pix, códigos e impressões digitais ficam fora.",
+  "checkout": {
+    "endpoint": {
+      "method": "POST",
+      "host": "www.ifood.com.br",
+      "path": "/site-api/v2/carts/{cartId}/checkout"
+    },
+    "status": 201,
+    "headers_required": [
+      "authorization",
+      "x-ifood-customer-id",
+      "x-ifood-device-id",
+      "x-ifood-device-payment-secret",
+      "x-ifood-session-id"
+    ],
+    "body_shape": {
+      "cartRequest": "string(JSON)",
+      "cpfCnpj": "string",
+      "signature": "string(96, igual ao do carrinho)",
+      "paymentSources": {
+        "contextInfo": {
+          "tags": "string",
+          "cybersourceFingerprint": "string",
+          "clearsaleFingerprint": "string"
+        },
+        "sources": [
+          {
+            "source": "TOKEN",
+            "amount": {
+              "value": "number",
+              "currency": "BRL"
+            },
+            "additionalData": "object",
+            "paymentMethod": {
+              "id": "uuid",
+              "code": "string",
+              "name": "PIX",
+              "method": {
+                "name": "PIX"
+              },
+              "brand": {
+                "name": "PIX"
+              },
+              "type": {
+                "name": "ONLINE"
+              },
+              "liability": "IFOOD"
+            }
+          }
+        ]
+      }
+    },
+    "cartRequest_inner": {
+      "keys": [
+        "cartResponse",
+        "signature"
+      ],
+      "cartResponse_keys": [
+        "account",
+        "address",
+        "benefits",
+        "cartType",
+        "createdAt",
+        "currency",
+        "delivery",
+        "evaluators",
+        "expiresAt",
+        "fees",
+        "governance",
+        "hasAgeRestrictedItems",
+        "id",
+        "items",
+        "loyalty",
+        "merchant",
+        "paymentMethods",
+        "programs",
+        "rewards",
+        "source",
+        "status",
+        "summary",
+        "template",
+        "test",
+        "voucher"
+      ],
+      "note": "cartRequest é uma STRING com JSON aninhado, não objeto"
+    },
+    "absent_fields": [
+      "attemptPurchase",
+      "validationVersion",
+      "clientOrderId",
+      "idempotencyKey"
+    ],
+    "response_shape": {
+      "orderId": "string",
+      "pixQRCode": "string",
+      "cartResponse": "object"
+    },
+    "payment_notes": {
+      "amount_location": "sources[].amount (nível da fonte), não dentro de paymentMethod",
+      "amount_equals": "total do carrinho no momento do checkout — 37.89 após trocar entrega para PRIORITY (R$ 6,00); antes era 31.89",
+      "device_header_on_pix": "o checkout Pix MEDIDO enviou x-ifood-device-payment-secret (64 B) mesmo assim; afirmar 'Pix não usa' como 'não precisa' é inferência, 'não envia' é falso na captura",
+      "idempotency": "v2 não tem attemptPurchase: a garantia é signature + cartResponse assinados"
+    }
+  },
+  "snapshot_lease": {
+    "rule": "expiresAt do cartResponse = ultima mutacao do carrinho + 10.31s",
+    "measured": {
+      "last_mutation": "03:36:38.813Z (PUT deliveryMethod)",
+      "checkout_sent": "03:36:39.215Z (+0.40s)",
+      "snapshot_expiresAt": "03:36:49.120Z (+10.31s)"
+    },
+    "consequence": "aprovar intencao; mutar e finalizar na mesma janela de ~10 s"
+  },
+  "verification": {
+    "order_detail": {
+      "method": "GET",
+      "path": "/site-api/v3/customers/me/orders/{orderId}",
+      "keys": [
+        "bag",
+        "createdAt",
+        "delivery",
+        "deliveryMethod",
+        "deliveryOperation",
+        "details",
+        "fees",
+        "id",
+        "lastStatus",
+        "merchant",
+        "orderNumber",
+        "origin",
+        "payments",
+        "salesChannel",
+        "shortId",
+        "updatedAt",
+        "verificationCodes"
+      ]
+    },
+    "order_events": {
+      "method": "GET",
+      "path": "/site-api/v1/customers/me/orders/{orderId}/events",
+      "polling": "a cada ~5 s na tela de pagamento pendente (16 polls em 65 s)",
+      "event_keys": [
+        "eventId",
+        "orderId",
+        "timestamp",
+        "value",
+        "originalTimestamp",
+        "processedAt",
+        "source"
+      ]
+    },
+    "order_status_at_creation": "CREATED",
+    "pix_qr_also_in_order": "payments.methods[].pix.qrCode",
+    "delivery_code": {
+      "path": "verificationCodes[].value",
+      "source": "account-delivery-code",
+      "name": "DELIVERY_CODE",
+      "required": false,
+      "purpose": "código que o cliente fala ao entregador — 'meu agente pediu e eu recebo' precisa dele",
+      "does_not_block": "required:false significa que não bloqueia a entrega"
+    },
+    "timeline": {
+      "source": "GET /site-api/v1/customers/me/orders/{id}/events — 7 eventos deste pedido",
+      "events": [
+        {
+          "time": "00:36:41",
+          "value": "CREATED",
+          "means": "carrinho virou pedido"
+        },
+        {
+          "time": "00:39:12",
+          "value": "PLACED",
+          "means": "pagamento aprovado (2min31s depois)"
+        },
+        {
+          "time": "00:39:13",
+          "value": "CONFIRMED",
+          "means": "loja aceitou — NÃO é pagamento"
+        },
+        {
+          "time": "00:39:13",
+          "value": "DELIVERY_REQUEST_CREATED",
+          "means": "entrega solicitada"
+        },
+        {
+          "time": "00:39:13",
+          "value": "ENABLE_TIP",
+          "means": "gorjeta habilitada"
+        },
+        {
+          "time": "00:39:13",
+          "value": "DELIVERY_CREATED",
+          "means": "entrega criada"
+        },
+        {
+          "time": "00:39:19",
+          "value": "DELIVERY_REQUEST_IN_PROGRESS",
+          "means": "entrega em busca"
+        }
+      ],
+      "payment_marker": "CREATED → PLACED marca pagamento aprovado",
+      "no_payment_event": "NÃO existe evento PAYMENT_APPROVED; teste que espera esse nome nunca passa",
+      "confirmed_is_not_payment": "CONFIRMED é aceite da loja; pode separar muito do PLACED em pedido lento",
+      "payments_has_no_status": "o objeto `payments` do detalhe não tem campo de status; status só pela timeline",
+      "timezone_wart": "no mesmo evento, processedAt vem em UTC e timestamp em -03:00",
+      "eta_fields": [
+        "deliversAt",
+        "deliversEndAt"
+      ],
+      "final_state": {
+        "order_number": "7526",
+        "last_status": "CONFIRMED",
+        "eta": "00:43–00:58",
+        "total": 37.89,
+        "payment": "Pix pago (confirmado pelo operador)"
+      }
+    }
+  },
+  "legacy_wsloja": {
+    "path": "/ifood-ws-v3/v6/order/checkout",
+    "status": "presente no bundle, NAO usada pelo web atual",
+    "evidence": "nenhuma request a wsloja nas capturas cart-01/login-01"
+  },
+  "session": {
+    "ttl_unit": "minutos (~5), ordem de grandeza",
+    "not_a_ttl": "não é TTL contratual: a sessão DEGRADOU depois de tráfego automatizado; o expiresAt do cf_clearance continuava longo e o que caiu foi a pontuação de bot",
+    "evidence": "as mesmas leituras deram 403 cf-mitigated: challenge por curl ~5 min depois de funcionar no browser",
+    "consequence": "sidecar de sessão é necessário para leitura também, não só escrita",
+    "naming": "SESSION_DEGRADES_AFTER_MINUTES (observação), nunca SESSION_TTL_*"
+  }
+}

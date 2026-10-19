@@ -1,0 +1,64 @@
+[project]
+name = "ifood-sdk-workspace"
+version = "0.1.0"
+description = "Unofficial toolkit for the iFood consumer API: SDK, service and MCP server"
+requires-python = ">=3.14"
+dependencies = ["ifood-sdk"]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "ty",
+    "pytest",
+    "zensical",
+    "prek",
+]
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+ifood-sdk = { workspace = true }
+
+# lint & format (ruff)
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+# research holds capture scripts, not shipped code
+extend-exclude = ["research", "packages/*/tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # import sorting
+    "UP",   # pyupgrade
+    "B",    # bugbear
+    "C4",   # comprehensions
+    "SIM",  # simplify
+    "RET",  # return statements
+    "PTH",  # pathlib
+    "RUF",  # ruff-specific
+    "ANN",  # annotations
+    "S",    # bandit
+    "T20",  # no print in library code
+]
+ignore = ["ANN401"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["S101", "ANN", "E501", "RUF001", "RUF002", "RUF036", "SIM105", "T20"]
+
+# type checking (ty)
+[tool.ty.src]
+exclude = ["research", "packages/*/tests"]
+
+[tool.ty.rules]
+possibly-missing-import = "warn"
+unused-ignore-comment = "warn"
+
+[tool.pytest.ini_options]
+testpaths = ["packages/sdk/tests"]
+pythonpath = ["packages/sdk", "packages/sdk/tests"]
+addopts = "-q"
+markers = ["live: talks to the real API (needs a session jar)"]

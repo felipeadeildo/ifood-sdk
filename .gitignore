@@ -1,0 +1,21 @@
+# credentials and sessions
+session/
+.env
+*.jar.txt
+
+# research material: large, ephemeral, contains real traffic
+research/
+
+# generated docs site
+site/
+
+# resolved dependencies (the project does not pin versions)
+uv.lock
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# test cassettes: recorded locally, regenerable, carry real traffic
+packages/*/tests/cassettes/

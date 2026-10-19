@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "note": "Contrato do checkout com confiança declarada por campo. 'medido' veio de captura/bundle; 'inferido' é dedução com mecanismo; 'nao-medido' não pode virar asserção.",
+  "route": {
+    "path": "/v6/order/checkout",
+    "host": "wsloja (ifood-ws-v3)",
+    "versions": [
+      "v1",
+      "v2"
+    ],
+    "version_selector": "getCartCheckoutRoute (flag remota)",
+    "confidence": "medido-no-bundle"
+  },
+  "required_headers": {
+    "X-Ifood-Device-Id": {
+      "source": "cookie aDeviceId",
+      "confidence": "medido"
+    },
+    "X-Ifood-Device-Payment-Secret": {
+      "source": "cookie x-ifood-device-payment-<sha>, valor direto sem transformação",
+      "detail": "no bundle: K = 'x-ifood-device-payment-' + config; getCookie(K) -> header String(deviceSecret)",
+      "confidence": "medido-no-bundle"
+    },
+    "X-Ifood-Customer-Id": {
+      "source": "cookie aAccountId",
+      "confidence": "medido"
+    }
+  },
+  "payload": {
+    "cartResponse": {
+      "origin": "resposta do carrinho, assinada pelo servidor",
+      "treatment": "opaco: guardar inteiro, não derivar, não recalcular",
+      "confidence": "medido-no-bundle"
+    },
+    "validationVersion": {
+      "origin": "gerado no cliente",
+      "treatment": "string opaca, não interpretar",
+      "confidence": "medido-no-bundle"
+    },
+    "attemptPurchase": {
+      "origin": "identificador de tentativa no payload",
+      "idempotency": "inferido — NÃO medido",
+      "treatment": "o teste só pode afirmar o que o servidor responder; nada sobre semântica",
+      "confidence": "inferido"
+    },
+    "additionalPaymentData": {
+      "three_ds": [
+        "braintree_threeds2_payment_method_nonce",
+        "braintree_threeds2_payment_id"
+      ],
+      "confidence": "medido-no-bundle"
+    }
+  },
+  "unknowns": {
+    "cart_read": {
+      "status": "nao-medido",
+      "note": "não existe GET de carrinho no bundle (só POST/PUT/DELETE); não escrever leitura como se existisse"
+    },
+    "stale_price": {
+      "status": "nao-medido",
+      "note": "cartResponse + validationVersion no attemptPurchase SUGEREM validação de snapshot pelo servidor; não é contrato"
+    },
+    "device_pair_validation": {
+      "status": "inferido",
+      "note": "que o servidor exija coerência entre device id e segredo de pagamento é inferência"
+    }
+  },
+  "garnish": {
+    "status": "resolvido-na-v2",
+    "note": "v2 usa items[].subItems[{id,quantity}] e observation; `garnish` nao existe no v2. O ITEM-001 vinha do campo errado, nao da forma.",
+    "variants": [
+      {
+        "shape": "plano",
+        "keys": [
+          "parentCode",
+          "code",
+          "name",
+          "amount",
+          "unitPrice"
+        ],
+        "status": "descartado-na-v2"
+      },
+      {
+        "shape": "agrupado",
+        "keys": [
+          "code",
+          "garnishItens"
+        ],
+        "item_keys": [
+          "code",
+          "description",
+          "qty",
+          "unitPrice"
+        ],
+        "status": "descartado-na-v2"
+      }
+    ],
+    "v1": {
+      "field": "garnish",
+      "wire_shape": "nao-medido",
+      "note": "nome de campo do bundle para o host WSV3"
+    },
+    "trap": "o subItems[].id do v2 e o id da opcao no catalogo; o choiceCode do historico nao corresponde"
+  },
+  "policy": {
+    "no_auto_retry_on_purchase": true,
+    "reason": "POST de compra não é idempotente por contrato medido; timeout é estado desconhecido",
+    "human_gate": "hash do payload aprovado antes do POST"
+  },
+  "write_gate": {
+    "reading": "livre",
+    "writing": "dependente de sessao originada no browser",
+    "observed": "403 cf-mitigated: challenge em POST v1 e v2",
+    "clients_tested": [
+      "httpx",
+      "curl_cffi chrome",
+      "curl_cffi chrome131"
+    ],
+    "consequence": "fumaca de escrita nao roda por HTTP puro; MCP precisa de sidecar para escrever"
+  },
+  "write_policy": {
+    "applies_to": [
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE"
+    ],
+    "observed": "403 cf-mitigated: challenge",
+    "status": "estado do projeto",
+    "mobile_door": "Play Integrity (attestation), não chave embutida",
+    "rule": "nenhum teste de escrita pode se declarar offline/determinístico"
+  }
+}

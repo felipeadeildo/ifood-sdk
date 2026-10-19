@@ -1,0 +1,41 @@
+/* Docs styling: restrained, one accent, readable line length. */
+
+:root {
+  --md-primary-fg-color: #0f766e;
+  --md-primary-fg-color--light: #14b8a6;
+  --md-primary-fg-color--dark: #115e59;
+  --md-accent-fg-color: #0d9488;
+  --ifood-rule: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+/* Slightly narrower measure than the default, easier on long pages. */
+.md-grid {
+  max-width: 61rem;
+}
+
+.md-typeset {
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+/* Tables in the reference pages carry real content, so give them room. */
+.md-typeset table:not([class]) {
+  font-size: 0.72rem;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: color-mix(in srgb, var(--md-primary-fg-color) 8%, transparent);
+}
+
+/* Inline code should read as code, not as a highlight. */
+.md-typeset code {
+  border-radius: 0.2rem;
+  padding: 0.05rem 0.28rem;
+}
+
+/* Admonitions and blockquotes: a single rule instead of a filled box. */
+.md-typeset blockquote {
+  border-left: 2px solid var(--md-primary-fg-color);
+  color: inherit;
+  opacity: 0.9;
+}

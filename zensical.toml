@@ -1,0 +1,49 @@
+[project]
+site_name = "ifood-sdk"
+site_url = "https://example.com/ifood-sdk"
+site_description = "Unofficial toolkit for the iFood consumer API"
+site_author = "ifood-sdk"
+copyright = "Unofficial project. Not affiliated with iFood."
+
+extra_css = [
+  "stylesheets/extra.css",
+]
+
+nav = [
+  { "Home" = "index.md" },
+  { "Get started" = [
+      "guides/install.md",
+      "guides/login.md",
+      "guides/orders.md",
+      "guides/cart.md",
+  ] },
+  { "Reference" = [
+      "reference/client.md",
+      "reference/endpoints.md",
+      "reference/errors.md",
+      "reference/limits.md",
+  ] },
+  { "Project" = [
+      "architecture.md",
+      "roadmap.md",
+  ] },
+]
+
+[project.theme]
+features = ["navigation.sections", "navigation.top", "content.code.copy"]
+
+# Light
+[[project.theme.palette]]
+scheme = "default"
+primary = "teal"
+accent = "teal"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+# Dark
+[[project.theme.palette]]
+scheme = "slate"
+primary = "teal"
+accent = "teal"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to light mode"

@@ -1,0 +1,38 @@
+# prek hooks. Everything runs through `uv run`, so ruff/ty come from the project's own
+# dev dependency group: one version of truth, the same one CI and developers use.
+
+[[repos]]
+repo = "local"
+hooks = [
+    {
+        id = "ruff-check",
+        name = "ruff check (uv)",
+        entry = "uv run ruff check --force-exclude --fix",
+        language = "system",
+        types_or = ["python"],
+        require_serial = true,
+    },
+    {
+        id = "ruff-format",
+        name = "ruff format (uv)",
+        entry = "uv run ruff format --force-exclude",
+        language = "system",
+        types_or = ["python"],
+    },
+    {
+        id = "ty",
+        name = "ty check (uv)",
+        entry = "uv run ty check",
+        language = "system",
+        pass_filenames = false,
+        files = "\\.py$",
+    },
+    {
+        id = "pytest",
+        name = "pytest (fast unit tests)",
+        entry = "uv run pytest -q",
+        language = "system",
+        pass_filenames = false,
+        files = "\\.py$",
+    },
+]

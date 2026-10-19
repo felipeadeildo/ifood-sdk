@@ -1,0 +1,229 @@
+{
+  "schema": 1,
+  "source": "evidence/login-01 (captura do record.mjs com run_id/id, 2026-10-19T03:11Z) + leitura do bundle",
+  "note": "Fatos curados à mão a partir da captura. Zero PII aqui: só rotas, status e nomes de campo. É o contrato que os testes afirmam; os valores (key, tokens, e-mail) nunca são reproduzidos.",
+  "base": "https://www.ifood.com.br/site-api",
+  "login_is_passwordless": true,
+  "flows": {
+    "providers": {
+      "what": "lista os provedores de identidade disponíveis para o tenant",
+      "request": {
+        "method": "POST",
+        "path": "/v4/identity-providers",
+        "body_keys": [
+          "tenant_id"
+        ]
+      },
+      "response": {
+        "status": 200,
+        "array_of_keys": [
+          "name"
+        ]
+      },
+      "observed_names": [
+        "GOOGLE",
+        "FACEBOOK",
+        "APPLE",
+        "OTP_EMAIL",
+        "OTP_WHATSAPP",
+        "OTP_SMS"
+      ]
+    },
+    "account_lookup": {
+      "what": "dado o e-mail, devolve a conta/telefone do usuário (passo do OTP)",
+      "request": {
+        "method": "POST",
+        "path": "/v4/identity-providers",
+        "body_keys": [
+          "tenant_id",
+          "email"
+        ]
+      },
+      "response": {
+        "status": 200
+      },
+      "confidence": "declarado pelo ifood-api na captura; corpo não guardado por ter PII"
+    },
+    "authorization_code": {
+      "what": "envia o OTP (aqui o código sai do sistema do iFood para o usuário)",
+      "request": {
+        "method": "POST",
+        "path": "/v2/identity-providers/OTP/authorization-codes",
+        "body_keys": [
+          "tenant_id",
+          "type",
+          "phone"
+        ]
+      },
+      "response": {
+        "status": 201,
+        "keys": [
+          "key",
+          "timeout_in_seconds"
+        ]
+      },
+      "timeout_seconds": 60,
+      "single_use": true,
+      "never_replay": "o key é de uso único e o desafio expira em 60 s: um teste que repita este POST queima o desafio do operador",
+      "email_variant": {
+        "status": "desconhecido",
+        "note": "type EMAIL/OTP_EMAIL com `email` deu 400 nos dois formatos; não presumir simetria com telefone"
+      }
+    },
+    "challenge_token": {
+      "what": "troca o key opaco + o código de 6 dígitos pelo token de challenge",
+      "request": {
+        "method": "POST",
+        "path": "/v2/identity-providers/OTP/access-tokens",
+        "body_keys": [
+          "key",
+          "auth_code"
+        ]
+      },
+      "response": {
+        "status": 201,
+        "keys": [
+          "access_token"
+        ],
+        "note": "token opaco de challenge"
+      },
+      "auth_code_note": "o código de 6 dígitos entra AQUI e em nenhum outro lugar do fluxo"
+    },
+    "challenge_confirm": {
+      "what": "confirma o destino mascarado antes de o usuário digitar o código",
+      "request": {
+        "method": "POST",
+        "path": "/v1/identity-providers/OTP/challenges",
+        "body_keys": [
+          "token",
+          "tenant"
+        ]
+      },
+      "response": {
+        "status": 200,
+        "keys": [
+          "email"
+        ],
+        "email_is_masked": true
+      }
+    },
+    "authenticate": {
+      "what": "troca o token de challenge pelo JWT de sessão",
+      "request": {
+        "method": "POST",
+        "path": "/v3/identity-providers/OTP/authentications",
+        "body_keys": [
+          "tenant_id",
+          "token",
+          "device_id",
+          "email"
+        ]
+      },
+      "response": {
+        "status": 201,
+        "keys": [
+          "authenticated",
+          "account_id",
+          "access_token",
+          "refresh_token",
+          "external_id",
+          "blocked_by_user"
+        ]
+      }
+    }
+  },
+  "session_model": {
+    "jwt_exp_minus_iat_seconds": 7200,
+    "jwt_claims": {
+      "sub": "presente",
+      "iss": "iFood",
+      "tenantId": "IFO",
+      "wallet_type": "legacy",
+      "type": "access_token",
+      "did": "sha512 do device"
+    },
+    "refresh": {
+      "in_body": true,
+      "cookies": [
+        "aAccessToken",
+        "aRefreshToken"
+      ]
+    },
+    "edge_cookies": [
+      "_px3",
+      "_pxvid",
+      "_pxhd",
+      "pxcts",
+      "cf_clearance",
+      "__cf_bm",
+      "fstr.*"
+    ]
+  },
+  "consumers": {
+    "me": {
+      "method": "GET",
+      "path": "/v1/customers/me",
+      "status": 200,
+      "needs_auth": true
+    },
+    "me_on_consumer_api": {
+      "host": "https://consumer-api.ifood.com.br",
+      "path": "/v1/customers/me",
+      "status": 404,
+      "why": "rota não registrada no Kong: a conta no web mora no BFF (site-api), não no consumer-api"
+    },
+    "reorder_without_coordinates": {
+      "method": "GET",
+      "path": "/v1/customers/me/orders/{orderId}/reorder",
+      "status": 400,
+      "envelope": "flat",
+      "body": {
+        "code": "SCO-3000",
+        "message": "Parâmetros de lat e lon inválidos."
+      },
+      "note": "passa pelo PX e chega na regra de negócio: prova que a borda não barra tudo"
+    }
+  },
+  "px_policy": "chamada de fumaça é por endpoint, nunca por TTL: o _px3 sobreviveu para /v2/categories e /v2/home:fallback e morreu para /v1/merchants/restaurant/{uuid}/catalog",
+  "identity_required_headers": [
+    "app_name",
+    "app_version",
+    "platform",
+    "country",
+    "x-client-application-key",
+    "x-ifood-session-id",
+    "x-ifood-device-id",
+    "x-device-model",
+    "browser"
+  ],
+  "identity_required_headers_note": "sem qualquer um destes, o corpo exato vira 400 OTP-2000 Illegal Argument: passa pela borda e falha na regra de negócio",
+  "authorization_header": {
+    "format": "Bearer <jwt>",
+    "source_cookie": "aAccessToken",
+    "required_on": "todas as rotas autenticadas do BFF (medido: 43 requisições em login-01)",
+    "without_it": {
+      "status": 401,
+      "body": {
+        "message": "no jwt token"
+      }
+    }
+  },
+  "jar_findings": {
+    "derived_headers": {
+      "aSessionId": "x-ifood-session-id",
+      "aDeviceId": "x-ifood-device-id",
+      "aAppVersion": "app_version",
+      "aFasterAppKey": "x-client-application-key"
+    },
+    "saved_address_cookies": [
+      "address-latitude",
+      "address-longitude"
+    ],
+    "device_payment_secret_cookie_prefix": "x-ifood-device-payment-",
+    "observed_ttl": {
+      "_px3": "vencido no jar de 2026-10-19 (PX reavalia por path)",
+      "cf_clearance": "~1 ano no mesmo jar",
+      "__cf_bm": "~20 min"
+    }
+  }
+}

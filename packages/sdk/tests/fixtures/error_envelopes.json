@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "note": "Corpos de erro literais, medidos. Servem para o parser e para o desenho do cliente: três envelopes diferentes é contrato, não detalhe. Nenhum PII.",
+  "envelopes": {
+    "flat": {
+      "used_by": [
+        "marketplace",
+        "logistics",
+        "consumer-api"
+      ],
+      "codes_seen": [
+        "IFCS-2001",
+        "IFCS-2000",
+        "IFSL-2002",
+        "IFSL-2004"
+      ],
+      "example": {
+        "status": 404,
+        "headers": {
+          "x-ifood-error-code": "IFCS-2001"
+        },
+        "body": {
+          "code": "IFCS-2001",
+          "message": "Merchant not found",
+          "details": [
+            "ids not found: [00000000-0000-4000-8000-000000000000]"
+          ]
+        }
+      }
+    },
+    "nested": {
+      "used_by": [
+        "cart (WSV3)",
+        "checkout/refresh (WSV3)"
+      ],
+      "codes_seen": [
+        "CART-006",
+        "CART-007",
+        "ITEM-001",
+        "SCO-3000"
+      ],
+      "example": {
+        "status": 400,
+        "headers": {},
+        "body": {
+          "error": {
+            "code": "CART-006",
+            "message": "merchant is required"
+          }
+        }
+      }
+    },
+    "kong": {
+      "used_by": [
+        "host sem a rota registrada"
+      ],
+      "example": {
+        "status": 404,
+        "headers": {},
+        "body": {
+          "message": "Not Found"
+        }
+      }
+    },
+    "edge": {
+      "used_by": [
+        "Cloudflare (403 challenge)",
+        "Akamai (403 Access Denied)"
+      ],
+      "example": {
+        "status": 403,
+        "headers": {
+          "cf-mitigated": "challenge"
+        },
+        "body": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title>"
+      }
+    },
+    "bff_no_jwt": {
+      "used_by": [
+        "BFF www/site-api quando falta Authorization: Bearer"
+      ],
+      "codes_seen": [],
+      "example": {
+        "status": 401,
+        "headers": {},
+        "body": {
+          "message": "no jwt token"
+        }
+      }
+    }
+  },
+  "checkout_chain": {
+    "route": "POST /site-api/v1/carts",
+    "note": "ordem de validação descoberta pelo ifood-api; cada passo é um código distinto",
+    "steps": [
+      {
+        "code": "CART-006",
+        "message": "merchant is required"
+      },
+      {
+        "code": "CART-007",
+        "message": "Wrong input type for field merchant",
+        "means": "precisa objeto, não id solto"
+      },
+      {
+        "code": "CART-006",
+        "message": "address is required"
+      },
+      {
+        "code": "CART-006",
+        "message": "items is required"
+      },
+      {
+        "code": "CART-006",
+        "message": "id is required",
+        "where": "item"
+      },
+      {
+        "code": "CART-006",
+        "message": "delivery is required"
+      },
+      {
+        "code": "CART-007",
+        "message": "Wrong input type for field now",
+        "means": "string \"true\", não boolean"
+      },
+      {
+        "code": "ITEM-001",
+        "means": "complementos obrigatórios faltando"
+      }
+    ],
+    "valid_payload_shape": {
+      "merchant": {
+        "id": "<uuid>"
+      },
+      "address": "<objeto inteiro de /v1/customers/me/addresses>",
+      "items": [
+        {
+          "id": "<uuid>",
+          "quantity": 1,
+          "garnish": "<opcional>"
+        }
+      ],
+      "delivery": {
+        "id": "DEFAULT",
+        "mode": "DELIVERY",
+        "now": "true"
+      }
+    },
+    "headers": [
+      "access_key",
+      "secret_key"
+    ]
+  },
+  "reorder": {
+    "route": "GET /site-api/v1/customers/me/orders/{orderId}/reorder",
+    "query": [
+      "lat",
+      "lon"
+    ],
+    "without_coords": {
+      "status": 400,
+      "code": "SCO-3000",
+      "envelope": "desconhecido (não capturado com corpo)"
+    },
+    "response_keys": [
+      "id",
+      "updatedAt",
+      "merchant",
+      "deliveryMethod",
+      "bag"
+    ],
+    "bag_keys": [
+      "items",
+      "divergence"
+    ],
+    "item_keys": [
+      "id",
+      "externalId",
+      "name",
+      "quantity",
+      "subItems",
+      "totalPrice",
+      "unitPrice",
+      "notes"
+    ],
+    "subitem_keys": [
+      "id",
+      "externalId",
+      "name",
+      "quantity",
+      "unitPrice",
+      "choiceCode",
+      "customizations"
+    ]
+  },
+  "orders_list": {
+    "route": "GET /site-api/v4/customers/me/orders",
+    "query": [
+      "page",
+      "size"
+    ],
+    "observed": "10 pedidos, ~93 KB, com delivery.address, merchant, payments e bag"
+  },
+  "notes": {
+    "bff_requires_bearer": "o BFF não lê o JWT do cookie aAccessToken: exige Authorization: Bearer <jwt>; sem ele 401 {'message':'no jwt token'}",
+    "sco_3000_envelope": "flat, literal: {'code':'SCO-3000','message':'Parâmetros de lat e lon inválidos.'} (68 bytes)"
+  }
+}
