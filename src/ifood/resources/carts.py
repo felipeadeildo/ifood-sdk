@@ -95,7 +95,9 @@ class Carts:
         )
         return CartResponse.model_validate(result)
 
-    def set_payment_method(self, cart_id: str, payload: JsonObject) -> CartResponse:
+    def set_payment_method(
+        self, cart_id: str, payload: list[JsonObject] | JsonObject
+    ) -> CartResponse:
         return CartResponse.model_validate(
             self._t.request(
                 "PUT", endpoints.CART_PAYMENT_METHOD.format(cart_id=cart_id), json_body=payload

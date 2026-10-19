@@ -65,3 +65,49 @@ def merchant_lookup(merchant_id: str) -> dict[str, Any]:
 
 def repeat_order(order_id: str | None = None) -> dict[str, Any]:
     return runtime.get_client().repeat(order_id).model_dump(by_alias=True)
+
+
+def get_cart(cart_id: str) -> dict[str, Any]:
+    """Read a cart, including its signature and the price the server would charge."""
+    cart = runtime.get_client().carts.get(cart_id)
+    return cart.model_dump(by_alias=True)
+
+
+def create_cart_from_order(order_id: str) -> dict[str, Any]:
+    """Build a cart from a past order and send it.
+
+    Returns the cart id, the total and the signature. Nothing is charged here.
+    """
+    client = runtime.get_client()
+    prepared = client.repeat(order_id)
+    cart = client.carts.create(prepared.payload)
+    snapshot = cart.cart
+    return {
+        "cart_id": snapshot.id if snapshot else None,
+        "total": snapshot.total if snapshot else None,
+        "signature": cart.signature,
+        "diverged": prepared.diverged,
+        "warnings": prepared.warnings,
+    }
+
+
+def set_payment_method(cart_id: str, method_id: str) -> dict[str, Any]:
+    """Pick a payment method for the cart. The id comes from the cart snapshot."""
+    cart = runtime.get_client().carts.set_payment_method(cart_id, [{"id": method_id}])
+    return cart.model_dump(by_alias=True)
+
+
+def place_order(cart_id: str, cpf_cnpj: str) -> dict[str, Any]:
+    """Place the order. This creates a real order and returns the Pix code.
+
+    The order stays CREATED until the Pix is paid, so this call charges nothing by itself.
+    """
+    client = runtime.get_client()
+    placed = client.carts.place_order(cart_id, cpf_cnpj=cpf_cnpj)
+    detail = client.orders.get(placed.order_id)
+    return {
+        "order_id": placed.order_id,
+        "pix_qr_code": placed.pix_qr_code,
+        "status": detail.status,
+        "number": detail.number,
+    }

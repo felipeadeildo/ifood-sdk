@@ -72,6 +72,22 @@ def build_app() -> FastAPI:
     def merchant_items(merchant_id: str, latitude: float, longitude: float) -> list[dict[str, Any]]:
         return ops.merchant_items(merchant_id, latitude=latitude, longitude=longitude)
 
+    @app.get("/carts/{cart_id}", dependencies=guarded)
+    def get_cart(cart_id: str) -> dict[str, Any]:
+        return ops.get_cart(cart_id)
+
+    @app.post("/orders/{order_id}/cart", dependencies=guarded)
+    def create_cart_from_order(order_id: str) -> dict[str, Any]:
+        return ops.create_cart_from_order(order_id)
+
+    @app.put("/carts/{cart_id}/payment-method", dependencies=guarded)
+    def set_payment_method(cart_id: str, method_id: str) -> dict[str, Any]:
+        return ops.set_payment_method(cart_id, method_id)
+
+    @app.post("/carts/{cart_id}/checkout", dependencies=guarded)
+    def place_order(cart_id: str, cpf_cnpj: str) -> dict[str, Any]:
+        return ops.place_order(cart_id, cpf_cnpj)
+
     @app.get("/addresses", dependencies=guarded)
     def list_addresses() -> list[dict[str, Any]]:
         return ops.list_addresses()

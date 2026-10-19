@@ -43,6 +43,10 @@ def test_tools_are_listed() -> None:
         "list_orders",
         "get_order",
         "track_order",
+        "get_cart",
+        "create_cart_from_order",
+        "set_payment_method",
+        "place_order",
         "merchant_items",
         "merchant_lookup",
         "repeat_last_order",
@@ -72,3 +76,15 @@ def test_repeat_last_order_returns_a_payload() -> None:
     payload = call("repeat_last_order").structured_content or {}
     assert payload["merchant"] == "Pizza Prime"
     assert payload["warnings"] == []
+
+
+def test_get_cart_returns_the_snapshot() -> None:
+    payload = call("get_cart", {"cart_id": "cart-1"}).structured_content or {}
+    assert payload["signature"] == "sig"
+
+
+def test_place_order_returns_the_pix_code() -> None:
+    payload = call("place_order", {"cart_id": "cart-1", "cpf_cnpj": "000.000.000-00"})
+    result = payload.structured_content or {}
+    assert result["order_id"] == "order-1"
+    assert result["pix_qr_code"].startswith("000201")

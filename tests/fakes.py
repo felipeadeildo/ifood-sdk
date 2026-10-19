@@ -48,11 +48,44 @@ class FakePrepared:
         return {"merchant": "Pizza Prime", "warnings": [], "payload": {"items": []}}
 
 
+class FakeCartSnapshot:
+    id = "cart-1"
+    total = 28.89
+
+
+class FakeCartResponse:
+    cart = FakeCartSnapshot()
+    signature = "sig"
+
+    def model_dump(self, by_alias: bool = True) -> dict[str, object]:
+        return {"cartResponse": {"id": "cart-1", "summary": {"total": 28.89}}, "signature": "sig"}
+
+
+class FakePlaced:
+    order_id = "order-1"
+    pix_qr_code = "00020126"
+
+
+class FakeCarts:
+    def get(self, cart_id: str) -> FakeCartResponse:
+        return FakeCartResponse()
+
+    def create(self, payload: object) -> FakeCartResponse:
+        return FakeCartResponse()
+
+    def set_payment_method(self, cart_id: str, payload: object) -> FakeCartResponse:
+        return FakeCartResponse()
+
+    def place_order(self, cart_id: str, *, cpf_cnpj: str) -> FakePlaced:
+        return FakePlaced()
+
+
 class FakeClient:
     logged_in = True
     session = FakeSession()
     orders = FakeOrders()
     customers = FakeCustomers()
+    carts = FakeCarts()
 
     def repeat(self, order_id: str | None = None) -> FakePrepared:
         return FakePrepared()

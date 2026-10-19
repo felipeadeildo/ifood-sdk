@@ -30,3 +30,8 @@ not place anything. Sending the payload happens in the app, for the reason in
 A static bearer is the starting point. For a public deployment the next step is an OAuth
 2.1 access token validated by a library, not by string comparison, and a per-user session
 store instead of one file on disk.
+| `GET /carts/{id}` | cart snapshot with signature |
+| `POST /orders/{id}/cart` | build and send a cart from a past order |
+| `PUT /carts/{id}/payment-method?method_id=` | pick the payment method |
+| `POST /carts/{id}/checkout?cpf_cnpj=` | place the order, returns the Pix code |
+| `GET /merchants/{id}/items?latitude=&longitude=` | menu items with prices |

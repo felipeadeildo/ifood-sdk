@@ -44,3 +44,8 @@ is a thin wrapper over `ifood.ops`, the same module the HTTP service calls.
 
 Tools are tested in memory with the SDK's own `Client`, so a test needs no port and no
 subprocess: `tests/test_mcp_tools.py`.
+| `get_cart` | items, total, signature and lease |
+| `create_cart_from_order` | build a cart from a past order and send it |
+| `set_payment_method` | pick a payment method for the cart |
+| `place_order` | place the order and return the Pix code |
+| `merchant_items` | menu items with prices and choices |

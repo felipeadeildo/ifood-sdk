@@ -66,6 +66,26 @@ def build_server() -> MCPServer[Any]:
         return ops.track_order(order_id)
 
     @mcp.tool()
+    def get_cart(cart_id: str) -> dict[str, Any]:
+        """Read a cart: items, total, signature and the lease on the quote."""
+        return ops.get_cart(cart_id)
+
+    @mcp.tool()
+    def create_cart_from_order(order_id: str) -> dict[str, Any]:
+        """Build a cart from a past order and send it. Returns cart id, total and signature."""
+        return ops.create_cart_from_order(order_id)
+
+    @mcp.tool()
+    def set_payment_method(cart_id: str, method_id: str) -> dict[str, Any]:
+        """Pick a payment method for the cart. The id comes from the cart snapshot."""
+        return ops.set_payment_method(cart_id, method_id)
+
+    @mcp.tool()
+    def place_order(cart_id: str, cpf_cnpj: str) -> dict[str, Any]:
+        """Place the order and return the Pix code. Nothing is charged until it is paid."""
+        return ops.place_order(cart_id, cpf_cnpj)
+
+    @mcp.tool()
     def merchant_items(merchant_id: str, latitude: float, longitude: float) -> list[dict[str, Any]]:
         """Menu items with prices and choice groups for one merchant."""
         return ops.merchant_items(merchant_id, latitude=latitude, longitude=longitude)
