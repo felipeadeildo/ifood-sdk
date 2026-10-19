@@ -1,87 +1,91 @@
 <div align="center">
 
-<img src="docs/assets/logo.svg" width="72" height="72" alt="" />
+<img src="docs/assets/logo.svg" alt="ifood-sdk" width="72" />
 
 # ifood-sdk
 
-**Unofficial Python client for the iFood consumer API.**
+Unofficial Python client for the iFood consumer API.
 
-[![Python 3.14](https://img.shields.io/badge/python-3.14-0e3b2e?style=flat-square)](https://python.org)
-[![License: MIT](https://img.shields.io/badge/license-MIT-0e3b2e?style=flat-square)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-felipeadeildo.github.io-0e3b2e?style=flat-square)](https://felipeadeildo.github.io/ifood-sdk)
-[![Unofficial](https://img.shields.io/badge/status-unofficial-64748b?style=flat-square)](#)
+[![tests](https://github.com/felipeadeildo/ifood-sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/felipeadeildo/ifood-sdk/actions/workflows/tests.yml)
+[![docs](https://img.shields.io/badge/docs-felipeadeildo.github.io%2Fifood--sdk-0e3b2e)](https://felipeadeildo.github.io/ifood-sdk/)
+[![python](https://img.shields.io/badge/python-3.14+-3cc488)](https://github.com/felipeadeildo/ifood-sdk)
+[![license](https://img.shields.io/badge/license-MIT-8ba69d)](LICENSE)
 
 </div>
 
-> **Not affiliated with iFood.** This is an independent, unofficial client, built for
-> study and personal use on your own account. It does not bypass authentication: you log
-> in with your own phone and the code iFood sends you. Read the
-> [disclaimer](docs/disclaimer.md) before using it.
+**Documentation: https://felipeadeildo.github.io/ifood-sdk/**
+
+Login by OTP, read the order history, browse a menu, build a cart, place the order with Pix
+and follow it until the delivery code. Every route was measured against the live service, and
+`ifood.wire.endpoints` says which ones were confirmed and which are still guesses.
+
+> **Not affiliated with iFood.** Independent client, built for study and personal use on your
+> own account. It does not bypass authentication: you log in with your own phone and the code
+> iFood sends. Read the [disclaimer](docs/disclaimer.md) first.
+
+## Install
 
 ```bash
-git clone https://github.com/felipeadeildo/ifood-sdk
-cd ifood-sdk && uv sync --all-groups
+pip install ifood-sdk          # the client
+pip install "ifood-sdk[mcp]"   # plus the MCP server
+pip install "ifood-sdk[api]"   # plus the HTTP service
 ```
+
+Not on PyPI yet: clone the repository and run `uv sync --all-extras`.
+
+## Use it
 
 ```python
 import ifood
 
-client = ifood.Client(phone="+55 11 90000-0000")
-client.login()              # the code arrives on WhatsApp
-client.verify("123456")     # session saved to ~/.config/ifood-sdk/session.json
+client = ifood.Client(phone="+55 11 90000-0000", email="you@example.com")
+client.login()               # the code arrives on WhatsApp
+client.verify("123456")      # session saved under ~/.config/ifood-sdk/
 
-for order in client.orders.recent(3):
-    print(order.number, order.status, order.merchant.name)
+order = client.orders.recent(1)[0]
+print(order.number, order.status, order.merchant.name, order.delivery_code)
 ```
 
-Next time, no login:
+## What you get
 
-```python
-import ifood
+| Capability | Call |
+|---|---|
+| OTP login, session saved on disk | `Client(phone=...).login().verify(code)` |
+| Profile and saved addresses | `client.customers.profile()`, `client.customers.addresses()` |
+| Place search and new address | `client.locations.search(query)`, `client.customers.add_address(...)` |
+| Menu with prices and choices | `client.merchants.items(id, latitude=, longitude=)` |
+| Order history, detail, timeline | `client.orders.recent()`, `get()`, `events()` |
+| Repeat a past order | `client.orders.reorder(order, latitude=, longitude=)` |
+| Cart build, create, edit | `client.carts.build/create/update_item/get` |
+| Payment and checkout | `client.carts.set_payment_method()`, `place_order()` |
+| Delivery code | `order.delivery_code` |
 
-client = ifood.Client()
-previous = client.orders.reorder(client.orders.recent(1)[0], latitude=-23.61, longitude=-46.67)
-print(previous.merchant.name)
+## Three ways to use it
+
+```bash
+python -m ifood.mcp                                          # agent tools over stdio
+uvicorn ifood.api:build_app --factory --port 8000            # HTTP service with bearer
 ```
+
+The MCP server and the HTTP service call the same operations from `ifood/ops.py`, so a fix
+lands in both. The HTTP surfaces need a token: `IFOOD_MCP_TOKEN` and `IFOOD_API_TOKEN`.
 
 ## What it does not do
 
-Placing an order. `POST` and `PUT` on the iFood web API return a Cloudflare challenge for
-any client whose TLS did not mint the session, and the mobile API requires device
-attestation. The client builds and validates the cart payload locally, then stops. See
+Grouped catalog and search sit behind PerimeterX and answer `EdgeBlocked`. Edge cookies last
+minutes, so an old jar also comes back as `EdgeBlocked`. Details in
 [limits](docs/reference/limits.md).
-
-## Documentation
-
-```bash
-uv run zensical serve     # local site
-```
-
-Guides live in `docs/`: `install`, `login`, `orders`, `cart`, plus `reference` for
-endpoints, errors and limits.
-
-## Legal
-
-Unofficial project, not affiliated with, endorsed by, or supported by iFood. Intended for
-study and interoperability on your own account. The full text, including the limits of the
-warranty, is in [docs/disclaimer.md](docs/disclaimer.md).
 
 ## Development
 
 ```bash
-uv sync --all-groups
-uv run prek run --all-files
+uv sync --all-groups --all-extras
+uv run prek run --all-files      # ruff, ty and pytest
+uv run zensical serve            # documentation on :8000
 ```
 
-`prek` runs ruff, ty and pytest from the project's own dependency group, so the machine
-and CI use the same versions. Layout: `packages/sdk` is the client; `research` holds the
-captures and the decompiled app, and is not versioned.
-
-
-<br />
-
 <div align="center">
-<a href="https://adeildo.dev"><img src="https://adeildo.dev/assets/images/cat.svg" width="44" alt="A cat asleep on a laptop, the adeildo.dev logo"></a>
-<br>
-<sub>Brought to you by <a href="https://adeildo.dev">adeildo.dev</a></sub>
+  <img src="docs/assets/cat.svg" alt="adeildo" width="42" />
+  <br />
+  Brought to you by <a href="https://adeildo.dev">adeildo.dev</a>
 </div>
