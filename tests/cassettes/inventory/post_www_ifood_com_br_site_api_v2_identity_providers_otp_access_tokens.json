@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:12:34.597Z",
+  "source": "inventory:post_www_ifood_com_br_site_api_v2_identity_providers_otp_access_tokens",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/site-api/v2/identity-providers/OTP/access-tokens",
+    "body": {
+      "key": "<redacted>",
+      "auth_code": "<redacted>"
+    },
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/entrar/otp?phone=<redacted>&otpKey=<redacted>&preference=WhatsApp&emailOrPhone=<redacted>",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "access_token": "<redacted>"
+    },
+    "text": null
+  }
+}

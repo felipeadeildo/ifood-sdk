@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:32.387Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v3_customers_me_wallet_benefits",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v3/customers/me/wallet/benefits?lat=<redacted>&lon=<redacted>&distanceInKm=<redacted>",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/delivery/sao-paulo-sp/pizza-prime---campo-belo-campo-belo/3808715c-c238-470e-8949-08a2b1f5a2e0",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "vouchers": [
+        {
+          "id": "<redacted>",
+          "code": "<redacted>",
+          "expiresAt": "<string>",
+          "lastUpdatedAt": "<redacted>",
+          "status": "<string>",
+          "campaign": {
+            "id": "<redacted>",
+            "code": "<redacted>",
+            "startsAt": "<string>",
+            "endsAt": "<string>",
+            "promoDescription": "<string>",
+            "promoShortDescription": "<string>",
+            "promoTerms": [
+              "<string>"
+            ],
+            "conditions": [
+              {
+                "type": "<string>",
+                "comparator": "<string>",
+                "value": [
+                  "<string>"
+                ]
+              }
+            ],
+            "descriptionTags": [
+              {
+                "ID": "<string>",
+                "shortDescription": "<string>"
+              }
+            ],
+            "effects": [
+              {
+                "maxCredit": "<number>",
+                "target": "<string>",
+                "type": "<string>",
+                "value": "<number>"
+              }
+            ],
+            "vertical": "<null>",
+            "labels": []
+          },
+          "totalUsage": "<number>",
+          "timesUsed": "<number>",
+          "lastUsedAt": "<null>",
+          "merchantsAvailable": "<null>",
+          "currency": "<string>",
+          "domain": "<string>",
+          "metadata": {
+            "growthStrategy": "<string>",
+            "externalId": "<redacted>"
+          },
+          "constraint": "<null>",
+          "blockPromotionalItems": "<null>"
+        }
+      ],
+      "benefitsToken": "<redacted>",
+      "limit": "<null>",
+      "total": "<null>"
+    },
+    "text": null
+  }
+}

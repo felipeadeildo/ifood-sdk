@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:28:05.218Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v1_payments_br_wallet_payment_methods",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v1/payments/br/wallet/payment-methods",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/pagamento",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": [
+      {
+        "id": "<redacted>",
+        "name": "<string>",
+        "type": {
+          "name": "<string>",
+          "description": "<string>"
+        },
+        "method": {
+          "name": "<string>",
+          "description": "<string>"
+        },
+        "liability": "<string>",
+        "brand": {
+          "id": "<redacted>",
+          "name": "<string>",
+          "description": "<string>"
+        },
+        "digital_wallet": {
+          "id": "<redacted>",
+          "name": "<string>",
+          "description": "<string>"
+        },
+        "additional_data": {
+          "movile_pay_allowed_brands": [
+            {
+              "brand_id": "<redacted>",
+              "method": "<string>",
+              "type": "<string>"
+            }
+          ],
+          "payment_maestro_allowed_combination": [
+            {
+              "minimum_version": "<string>",
+              "name": "<string>"
+            }
+          ]
+        },
+        "required_cvv": "<bool>",
+        "allowed_combination": "<bool>",
+        "installment": {
+          "enabled": "<bool>",
+          "max_installments": "<number>"
+        }
+      }
+    ],
+    "text": null
+  }
+}

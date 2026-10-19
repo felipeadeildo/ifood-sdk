@@ -41,4 +41,4 @@ The server uses the official SDK (`mcp.server.MCPServer`, v2, Streamable HTTP). 
 is a thin wrapper over `ifood.ops`, the same module the HTTP service calls.
 
 Tools are tested in memory with the SDK's own `Client`, so a test needs no port and no
-subprocess: `packages/sdk/tests/test_mcp_tools.py`.
+subprocess: `tests/test_mcp_tools.py`.

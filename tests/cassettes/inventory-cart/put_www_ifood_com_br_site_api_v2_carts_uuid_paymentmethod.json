@@ -1,0 +1,766 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:34:29.492Z",
+  "source": "inventory:put_www_ifood_com_br_site_api_v2_carts_uuid_paymentmethod",
+  "request": {
+    "method": "PUT",
+    "url": "https://www.ifood.com.br/site-api/v2/carts/1985c745-609c-4e7b-bba0-8e8a5901e65d/paymentMethod",
+    "body": [
+      {
+        "id": "75354fd8-e916-41db-9286-93be2232efe2"
+      }
+    ],
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/pedido/finalizar",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "data": {
+        "delivery": {
+          "deliveryMethods": [
+            {
+              "timeSlotId": "<null>",
+              "id": "<string>",
+              "code": "<string>",
+              "title": "<string>",
+              "subtitle": "<string>",
+              "description": "<null>",
+              "mainPrice": "<string>",
+              "animatedMainPrice": "<null>",
+              "secondaryPrice": "<string>",
+              "accessibilityText": "<string>",
+              "selected": "<bool>",
+              "disabled": "<bool>",
+              "borderAnimationUrl": "<null>",
+              "titleImageUrl": "<null>",
+              "scheduled": "<bool>",
+              "hasMoreTimeSlotOptions": "<bool>",
+              "deliveryBy": "<string>",
+              "mode": "<string>",
+              "maxTime": "<number>",
+              "analytics": {
+                "price": "<string>",
+                "originalPrice": "<string>",
+                "additionalPrice": "<string>",
+                "startTime": "<string>",
+                "endTime": "<string>",
+                "minTime": "<string>",
+                "maxTime": "<string>",
+                "date": "<string>"
+              },
+              "priority": "<number>"
+            }
+          ],
+          "header": "<null>",
+          "analytics": {
+            "hasSurge": "<bool>"
+          }
+        },
+        "summary": {
+          "benefits": [
+            {
+              "type": "<string>",
+              "formattedText": "<string>",
+              "formattedValue": "<string>"
+            }
+          ],
+          "itemsTotal": {
+            "formattedText": "<string>",
+            "formattedValue": "<string>",
+            "accessibilityText": "<string>"
+          },
+          "delivery": {
+            "formattedText": "<string>",
+            "formattedValue": "<string>",
+            "accessibilityText": "<string>"
+          },
+          "discounts": "<null>",
+          "savings": {
+            "header": {
+              "formattedText": "<string>",
+              "savingsType": "<string>",
+              "amount": "<number>",
+              "accessibilityText": "<string>"
+            },
+            "discounts": [
+              {
+                "formattedText": "<string>",
+                "formattedValue": "<string>",
+                "accessibilityText": "<string>"
+              }
+            ],
+            "analytics": {
+              "programIcon": "<string>",
+              "totalSavings": "<number>",
+              "itemDiscountMerchant": "<number>",
+              "itemDiscountProgram": "<null>",
+              "itemDiscountProgramSource": "<null>",
+              "deliveryFeeDiscount": "<number>",
+              "deliveryFeeDiscountProgramSource": "<string>",
+              "voucherDiscount": "<number>",
+              "voucherDiscountProgramSource": "<null>"
+            }
+          },
+          "interest": "<null>",
+          "analytics": {
+            "totalItemsOriginalAmount": "<number>",
+            "totalItemsAmount": "<number>",
+            "programTotalItemDiscount": "<null>",
+            "programItemDiscount": "<null>",
+            "originalDeliveryFee": "<number>",
+            "deliveryFee": "<number>",
+            "programDeliveryFee": "<string>",
+            "fee": "<number>",
+            "voucherValue": "<number>",
+            "programVoucherValue": "<null>",
+            "checkoutType": "<string>",
+            "superCategories": "<string>",
+            "campaignIds": [
+              "<string>"
+            ]
+          },
+          "missions": "<null>"
+        },
+        "fees": {
+          "values": []
+        },
+        "item": {
+          "items": [
+            {
+              "id": "<redacted>",
+              "cartItemId": "<redacted>",
+              "ean": "<string>",
+              "logoUrl": "<redacted>",
+              "name": "<string>",
+              "description": "<string>",
+              "observation": "<string>",
+              "price": "<string>",
+              "badges": "<null>",
+              "quantity": {
+                "value": "<number>",
+                "availableUnits": [
+                  {
+                    "name": "<string>",
+                    "displayValue": "<number>",
+                    "increment": "<number>",
+                    "minimum": "<number>",
+                    "selected": "<bool>"
+                  }
+                ]
+              },
+              "accessibilityText": "<string>",
+              "editable": "<bool>",
+              "incentiveTag": "<null>",
+              "displayTags": [],
+              "complements": [
+                {
+                  "id": "<redacted>",
+                  "quantity": "<number>",
+                  "description": "<string>",
+                  "accessibilityText": "<string>",
+                  "subItems": "<null>"
+                }
+              ],
+              "replacementOption": "<null>",
+              "stock": "<null>",
+              "tags": [],
+              "analytics": "<null>",
+              "isAlcoholic": "<bool>",
+              "isAgeRestricted": "<bool>",
+              "promotionalSummary": "<null>"
+            }
+          ],
+          "headerTitle": "<string>",
+          "replacementOptions": {
+            "shouldShow": "<bool>"
+          },
+          "hasAgeRestrictedItems": "<bool>",
+          "hasAddMoreItems": "<bool>",
+          "promotionalItemConflictsWithClubVoucher": "<bool>",
+          "hasAlcoholicItems": "<bool>"
+        }
+      },
+      "cartResponse": {
+        "id": "<redacted>",
+        "cartType": "<string>",
+        "merchant": {
+          "id": "<redacted>",
+          "name": "<string>",
+          "type": "<string>",
+          "deliveryAreaId": "<redacted>",
+          "deliveryMethods": [
+            {
+              "id": "<string>",
+              "code": "<string>",
+              "scope": [],
+              "state": "<string>",
+              "scheduling": "<string>",
+              "type": "<string>",
+              "pricingMode": "<string>",
+              "price": "<number>",
+              "additionalPrice": "<number>",
+              "title": "<string>",
+              "subtitle": "<string>",
+              "minTime": "<number>",
+              "maxTime": "<number>",
+              "priority": "<number>",
+              "deliveredBy": "<string>",
+              "zoneId": "<string>",
+              "schedule": {
+                "now": "<bool>",
+                "selectedTimeSlot": "<null>",
+                "timeSlots": []
+              },
+              "enabled": "<bool>",
+              "presetTimeSlot": "<null>",
+              "logisticProvider": "<string>",
+              "originValue": "<number>",
+              "deliveryProduct": "<string>",
+              "hasDelta": "<bool>",
+              "deltaPrice": "<number>",
+              "basePrice": "<number>",
+              "isSurgePrice": "<bool>",
+              "category": "<string>",
+              "programId": "<null>",
+              "testDmCode": "<null>",
+              "box": "<null>"
+            }
+          ],
+          "config": {
+            "ABB_CURVA_ABC_OUT22": "<string>",
+            "ADDRESS_PREFORM_TYPE": "<string>",
+            "ADS-MAGIACOCACOLA10-MAI24": "<string>",
+            "ADS_COCASEMACUCAR": "<string>",
+            "ADS_COCA_DEZ23": "<string>",
+            "ADS_COCA_MCDONALDS_SET20": "<string>",
+            "ADS_CUPOMCOCA_JOGOS_V10": "<string>",
+            "ADS_FANTAGUARANA_NOV23": "<string>",
+            "ADS_MCDONALDS_OUT22": "<string>",
+            "ADS_MCDONNALDS_25_09_V2": "<string>",
+            "ADS_MCLANCHEBEBIDA_JUN24": "<string>",
+            "ADS_MEQUICOCA_COMBO_NOV25": "<string>",
+            "ADS_PUSH_REDBULL_MEQUI_OUT25": "<string>",
+            "ADS_REST_CCSA_AGO23": "<string>",
+            "ADS_REST_COCACOLA_MCDONALDS_SET25": "<string>",
+            "ADS_REST_HAMBURGUERCOCA": "<string>",
+            "ADS_REST_MC_25_09": "<string>",
+            "ADS_VIDEOADS_MCDONALDS_NOV25": "<string>",
+            "AQS_RESTAURANTES_ELEGIVEIS_CUPONS": "<string>",
+            "AQS_RESTAURANTES_ELEGIVEIS_CUPONS_V3": "<string>",
+            "ATV_COPA_LANCHES_NOV22": "<string>",
+            "BIGMAC_20OFF": "<string>",
+            "CART::MCHT::ATV_FD_DESPENT_C95E8_088_cbd": "<string>",
+            "CART::MCHT::ATV_FD_DESPENT_C95E8_088_cbd_16e": "<string>",
+            "CART::MCHT::ATV_FD_DESPENT_C95E8_088_cbd_ada": "<string>",
+            "CART::MCHT::FD_DESPDD_14A8B": "<string>",
+            "CART::MCHT::FD_DESPDD_762E9": "<string>",
+            "CART::MCHT::FD_DESPDD_D7B6D": "<string>",
+            "CART::MCHT::FD_DESPDD_F3A7E_e795": "<string>",
+            "CART::MCHT::FD_DESPENT_0196E": "<string>",
+            "CART::MCHT::FD_DESPENT_25FE6": "<string>",
+            "CART::MCHT::FD_DESPENT_3A89C": "<string>",
+            "CART::MCHT::FD_DESPENT_51E42": "<string>",
+            "CART::MCHT::FD_DESPENT_733AD": "<string>",
+            "CART::MCHT::FD_DESPENT_9167D": "<string>",
+            "CART::MCHT::FD_DESPENT_988B3": "<string>",
+            "CART::MCHT::FD_DESPENT_A48C1": "<string>",
+            "CART::MCHT::FD_DESPENT_B34AF": "<string>",
+            "CART::MCHT::FD_DESPENT_D9228": "<string>",
+            "CART::MCHT::FD_DESPENT_EEF6A": "<string>",
+            "CART::MCHT::FD_DESPENT_FE051": "<string>",
+            "CHOCOLATRAS_KA_JUL21": "<string>",
+            "CLUBEMC": "<string>",
+            "CLUBEVIP_FOOD": "<string>",
+            "CLUBE_MCCRISPY": "<string>",
+            "CLUBE_MEQUI_TURBINE": "<string>",
+            "CLUBE_MERCHANT_COCA": "<string>",
+            "CLUBE_PROGRAMA_COCA": "<string>",
+            "CLUBE_SOMENTE_RESTAURANTES": "<string>",
+            "CLUBE_SUPER_RESTAURANTES": "<string>",
+            "COCAMEQUICOMBOS_DEZ25": "<string>",
+            "COCA_DV_DEZ24": "<string>",
+            "COCA_ITENS_2": "<string>",
+            "COCA_ITENS_3": "<string>",
+            "COCA_MEQUI_DEZ25": "<string>",
+            "COCA_REST_AGO24_LANCHES": "<string>",
+            "COMBOSCOMMOLHOS": "<string>",
+            "COMBOSOLTEIROSMC": "<string>",
+            "CS_FORCED_MAX_DISTANCE_REMOVAL": "<string>",
+            "DEVLOG_COBERTURA": "<string>",
+            "DEVLOG_FICHA_CURVA_ABC": "<string>",
+            "DEVLOG_FICHA_CURVA_ABC_DINNER": "<string>",
+            "DEVLOG_TOP_ITEM_DINNER": "<string>",
+            "DEVLOG_TOP_ITEM_LUNCH": "<string>",
+            "DIADASCRIANCAS_OUT23": "<string>",
+            "DIADOSNAMORADOSMC": "<string>",
+            "DIA_DAS_CRIANCAS_OUT21": "<string>",
+            "DIA_DOS_PAIS_2023": "<string>",
+            "ENABLE_INSTALLMENT_INTEREST": "<string>",
+            "ENTREGARASTREAVEL": "<string>",
+            "EXPANSAO_HUB_TURNO_CAFE": "<string>",
+            "EXPANSAO_HUB_TURNO_MADRUGADA": "<string>",
+            "EXPRESS_CAFE": "<string>",
+            "FAMOSOS": "<string>",
+            "FAMOSOS_IFOOD_JAN22": "<string>",
+            "FANTA_GUARANA_JAN22": "<string>",
+            "GRANDESMARCAS_BASECAPTADA": "<string>",
+            "GRANDES_MARCAS_MARCO": "<string>",
+            "GROCERIES_STOCK_CONTROL": "<string>",
+            "GUIDED_HELP_TYPE": "<string>",
+            "HAMBURGUER_TOPREST": "<string>",
+            "HIGH_REPUTATION_RESTAURANTS": "<string>",
+            "INVENTORY_CAMPAIGN_ACCEPTANCE_ANSWERED": "<string>",
+            "ITENS_HAMBURGUER": "<string>",
+            "JETSKI_WPP_FREQ": "<string>",
+            "JET_WPP_FREQ_23_03_TO_26_03": "<string>",
+            "KEY_ACCOUNT": "<string>",
+            "LEVE2PAGUE1_MAR22": "<string>",
+            "LISTA_OCULTA_DELVALLE_SET21": "<string>",
+            "LIST_MERCHANTS_FULL_ONLINE_15_DIAS": "<string>",
+            "LUNCH_20MIN": "<string>",
+            "MC-LANCAMENTOCHICKEN-AGO21": "<string>",
+            "MC-TUDODEBOM-JUL21": "<string>",
+            "MCD-DIADOFRANGOFRITO-2023": "<string>",
+            "MCD-VISIBILIDADE-ATIVOS": "<string>",
+            "MCDIAFELIZ_OUT21": "<string>",
+            "MCDONALDS-NOVOS-JUN21": "<string>",
+            "MCDONALDSBBBFESTA": "<string>",
+            "MCDONALDSMADRUGADA": "<string>",
+            "MCDONALDSPBBANON": "<string>",
+            "MCDONALDS_CLUBE": "<string>",
+            "MCD_25_OFF_FEV23": "<string>",
+            "MCD_35_OFF_FEV23": "<string>",
+            "MCD_50OFF_TOPREST_04_2023": "<string>",
+            "MCD_CAZETV": "<string>",
+            "MCD_CAZETV2": "<string>",
+            "MCD_COPA_22": "<string>",
+            "MCD_IDS_MAR23": "<string>",
+            "MCD_MCDIAFELIZ_22": "<string>",
+            "MCD_MEQUIZICE_BROTHERS_23": "<string>",
+            "MCD_MIDIAPERFORMANCE_10_22": "<string>",
+            "MCD_THETOWN_2023": "<string>",
+            "MCD_VISIBILIDADE": "<string>",
+            "MCEXPRESS-OUT21": "<string>",
+            "MCOFERTASSNACK": "<string>",
+            "MCOFERTAS_HOMEPROMOS": "<string>",
+            "MC_50OFF": "<string>",
+            "MC_COMBOS": "<string>",
+            "MC_COMBOS_COCA": "<string>",
+            "MC_COMBOS_ROCK_2022_1": "<string>",
+            "MC_EXPRESS": "<string>",
+            "MC_MEQUIZICE_OUT_22": "<string>",
+            "MC_OFERTAS_IDSEXPRESS": "<string>",
+            "MC_TAG": "<string>",
+            "MELHORES_CAFE_MANHA_1P": "<string>",
+            "MELHORES_RESTAURANTES_CHURN_ABR21": "<string>",
+            "MISSOESIFOOD_CUPOMATE50": "<string>",
+            "MISSOESIFOOD_FOOD": "<string>",
+            "MKTPARC_DIADOBACON_PARCEIROS": "<string>",
+            "MKTPARC_DIADOBACON_PARCEIROS2": "<string>",
+            "MKTPARC_MEQUI_MCFLURRY": "<string>",
+            "MOEDASIFOOD2": "<string>",
+            "MPP_MC_2106": "<string>",
+            "NATURE_FRIENDLY_MANDATORY": "<string>",
+            "NOVIDADE_IFOOD_DEZ20 ": "<string>",
+            "NOVO_ABB_JUL20_V1": "<string>",
+            "NOVO_BOM_BARATO_JUN20": "<string>",
+            "PAGAMENTO_OFF": "<string>",
+            "PARCEIROCRITICOSTR-AGO": "<string>",
+            "PBB-MCD-OUT21": "<string>",
+            "PBB_CHURN_1299_JAN22": "<string>",
+            "PEDIDO_PREMIADO": "<string>",
+            "PRIORITARIOS": "<string>",
+            "PROMO_1_ANO_IFOOD": "<string>",
+            "QTAL_GENERAL": "<string>",
+            "QUERIDINHOS_IFOOD_ABR2021": "<string>",
+            "RANKING_FASTFOODS_FEV21": "<string>",
+            "REDFRIDAY_MEQUI": "<string>",
+            "RESTAURANTES": "<string>",
+            "RESTAURANTES-IFOOD-FEV22": "<string>",
+            "RESTAURANTESVIP": "<string>",
+            "RESTAURANTES_BRASIL": "<string>",
+            "RESTAURANTES_CLUBE": "<string>",
+            "RESTAURANTES_COCA_CLUBE_SET_22": "<string>",
+            "RESTAURANTES_FDSOUT": "<string>",
+            "REST_FANTA_V2_1024": "<string>",
+            "RES_ABR21_FANTA_EG": "<string>",
+            "RES_ADS_NOV22_STD_V10_20": "<string>",
+            "RES_AGO21_COCA_EG": "<string>",
+            "RES_MAI21_COCA_SOCIAL": "<string>",
+            "RES_MAI21_COCA_SOCIAL_LANCHES": "<string>",
+            "RES_MAI21_COCA_SOCIAL_LOJAS": "<string>",
+            "RES_MAI21_COCA_SOCIAL_MC": "<string>",
+            "SELECOESDOMEQUI": "<string>",
+            "SEMANAHAMBURGER_MAI22": "<string>",
+            "SEMANA_DO_HAMBURGER_PLANCOM": "<string>",
+            "SMALL_ORDER_FEE": "<string>",
+            "SMALL_ORDER_FEE_GROUP_A": "<string>",
+            "SMART_CAMPAIGN_HITS": "<string>",
+            "SO_TEM_NO_IFOOD": "<string>",
+            "SUBHOME_COPA_NOV22": "<string>",
+            "SUBSCRIPTION_CMPS_MVP": "<string>",
+            "SUGEST_DIA_G2_DOM_V3": "<string>",
+            "SUGEST_DIA_G2_QUA_V3": "<string>",
+            "SUGEST_DIA_G2_SAB_V3": "<string>",
+            "SUGEST_DIA_G3A_QUA_V3": "<string>",
+            "SUGEST_DIA_G3A_QUI_V4": "<string>",
+            "SUGEST_DIA_G3A_SAB_V4": "<string>",
+            "SUGEST_DIA_G3B_DOM_V3": "<string>",
+            "SUGEST_DIA_G3B_QUA_V3": "<string>",
+            "SUGEST_DIA_G3B_SAB_V3": "<string>",
+            "SUPERRESTAURANTES_CLUBE0510": "<string>",
+            "SUPER_RESTAURANT": "<string>",
+            "SUPER_RESTAURANTES_PASCOA": "<string>",
+            "SUPER_RESTAURANTES_V2": "<string>",
+            "TESTE_ALMOCO_EXPRESS": "<string>",
+            "TESTE_HIGH_ENDS_CLASSIFICATION": "<string>",
+            "TESTE_VOUCHER_FOOD_DELIVERY": "<string>",
+            "TOPREST_PAO_QUEIJO": "<string>",
+            "TOP_RESTAURANTES_VOUCHER_MARCO2024": "<string>",
+            "TOP_REST_ABR2023": "<string>",
+            "TOP_REST_KA_EX": "<string>",
+            "TOP_REST_TAXAITEM": "<string>",
+            "TR_BACON": "<string>",
+            "ULTRA_ALMOCO": "<string>",
+            "ULTRA_SNACK": "<string>",
+            "VIDEOADS_MCDONALDS_ABR26": "<string>",
+            "VISIBILIDADE_MARCAS_KA": "<string>",
+            "VISIBILIDADE_TOP2_PRATOS_KA": "<string>",
+            "VISIBILIDADE_TOPREST_JAN23": "<string>",
+            "VOUCHERNOVOS_MC_AGO21": "<string>",
+            "nationalIdentificationNumberRequired": "<string>",
+            "test": "<string>"
+          },
+          "tags": [
+            "<string>"
+          ],
+          "address": "<redacted>",
+          "minimumPrice": "<number>",
+          "logoFileName": "<redacted>",
+          "distance": "<number>",
+          "distances": [
+            {
+              "type": "<string>",
+              "value": "<number>",
+              "unit": "<string>"
+            }
+          ],
+          "zone": "<string>",
+          "shifts": [
+            {
+              "dayOfWeek": "<string>",
+              "startTime": "<string>",
+              "endTime": "<string>"
+            }
+          ],
+          "preparationTime": "<number>",
+          "mcc": "<string>",
+          "superCategories": [
+            "<string>"
+          ],
+          "business": "<string>"
+        },
+        "address": "<redacted>",
+        "items": [
+          {
+            "id": "<redacted>",
+            "type": "<string>",
+            "externalId": "<redacted>",
+            "cartItemId": "<redacted>",
+            "quantity": "<number>",
+            "unitPrice": "<number>",
+            "description": "<string>",
+            "details": "<string>",
+            "observation": "<string>",
+            "sellingOption": "<null>",
+            "tags": [],
+            "promotionalPrice": "<number>",
+            "amount": "<number>",
+            "originalAmount": "<number>",
+            "category": {
+              "name": "<string>",
+              "code": "<redacted>"
+            },
+            "logoUrl": "<redacted>",
+            "needChoice": "<bool>",
+            "choice": [
+              {
+                "code": "<string>",
+                "name": "<string>",
+                "numberMinOfChoices": "<number>",
+                "numberMaxOfChoices": "<number>",
+                "type": "<string>",
+                "externalCode": "<string>",
+                "subItem": [
+                  {
+                    "id": "<redacted>",
+                    "externalId": "<redacted>",
+                    "quantity": "<number>",
+                    "description": "<string>",
+                    "amount": "<number>",
+                    "observation": "<string>",
+                    "unitPrice": "<number>",
+                    "subItemOrder": "<null>",
+                    "subItemChoices": []
+                  }
+                ]
+              }
+            ],
+            "stock": "<null>",
+            "localId": "<number>",
+            "productTags": [
+              {
+                "group": "<string>",
+                "tags": [
+                  "<string>"
+                ]
+              }
+            ],
+            "subItems": [],
+            "ean": "<null>",
+            "programIds": [],
+            "isAgeRestricted": "<bool>",
+            "attachments": []
+          }
+        ],
+        "account": {
+          "id": "<redacted>",
+          "name": "<redacted>",
+          "taxPayerIdentificationNumber": "<null>",
+          "phone": "<redacted>",
+          "email": "<redacted>",
+          "language": "<string>",
+          "tenantId": "<string>",
+          "active": "<bool>",
+          "registrationDate": "<string>",
+          "clubSegmentations": {
+            "club_plan_lifecycle": "<number>",
+            "club_plan_tier": "<number>"
+          },
+          "segmentation": "<string>",
+          "isAdult": "<null>"
+        },
+        "delivery": {
+          "id": "<string>",
+          "code": "<string>",
+          "scope": [],
+          "state": "<string>",
+          "scheduling": "<string>",
+          "type": "<string>",
+          "pricingMode": "<string>",
+          "price": "<number>",
+          "additionalPrice": "<number>",
+          "title": "<string>",
+          "subtitle": "<string>",
+          "minTime": "<number>",
+          "maxTime": "<number>",
+          "priority": "<number>",
+          "deliveredBy": "<string>",
+          "zoneId": "<string>",
+          "schedule": {
+            "now": "<bool>",
+            "selectedTimeSlot": "<null>",
+            "timeSlots": []
+          },
+          "enabled": "<bool>",
+          "presetTimeSlot": "<null>",
+          "logisticProvider": "<string>",
+          "originValue": "<number>",
+          "deliveryProduct": "<string>",
+          "hasDelta": "<bool>",
+          "deltaPrice": "<number>",
+          "basePrice": "<number>",
+          "isSurgePrice": "<bool>",
+          "category": "<string>",
+          "programId": "<null>",
+          "testDmCode": "<null>",
+          "box": {
+            "available": "<bool>",
+            "selectable": "<bool>",
+            "selected": "<bool>"
+          }
+        },
+        "paymentMethods": [
+          {
+            "id": "<redacted>",
+            "name": "<string>",
+            "type": "<string>",
+            "typeDescription": "<string>",
+            "method": "<string>",
+            "methodDescription": "<string>",
+            "liability": "<string>",
+            "brand": {
+              "id": "<redacted>",
+              "name": "<string>",
+              "description": "<string>",
+              "regex": "<string>",
+              "cvvRegex": "<string>"
+            },
+            "digitalWallet": {
+              "id": "<null>",
+              "name": "<null>",
+              "description": "<null>"
+            },
+            "additionalData": {
+              "payment_maestro_allowed_combination": [
+                {
+                  "minimum_version": "<string>",
+                  "name": "<string>"
+                }
+              ]
+            },
+            "acceptChange": "<null>",
+            "externalId": "<redacted>",
+            "tenant": "<string>",
+            "active": "<bool>",
+            "cardBin": "<null>",
+            "setupId": "<null>",
+            "cardToken": "<null>",
+            "installment": "<null>",
+            "installmentOptions": [],
+            "externalReference": "<redacted>",
+            "policy": "<null>",
+            "amount": "<null>",
+            "walletAccount": "<null>",
+            "enterpriseBalance": "<null>",
+            "requiredCvv": "<bool>",
+            "appliedRule": "<null>",
+            "allowedCombination": "<null>",
+            "installmentsEnabled": "<bool>",
+            "maxInstallments": "<number>"
+          }
+        ],
+        "benefits": [
+          {
+            "campaignId": "<redacted>",
+            "campaignType": "<string>",
+            "scope": "<string>",
+            "code": "<redacted>",
+            "contextualVoucherCampaignCode": "<null>",
+            "amount": "<number>",
+            "item": "<null>",
+            "sponsorships": [
+              {
+                "value": "<number>",
+                "type": "<string>"
+              }
+            ],
+            "isClube": "<bool>",
+            "campaignExperienceType": "<string>",
+            "campaignProgramId": "<string>",
+            "campaignProgramCode": "<string>",
+            "type": "<string>",
+            "constraints": [
+              {
+                "recoverable": "<bool>",
+                "code": "<null>",
+                "message": "<null>",
+                "condition": {
+                  "type": "<string>",
+                  "comparator": "<string>",
+                  "expected": "<string>",
+                  "actual": "<string>",
+                  "weak": "<bool>",
+                  "turnedPromotionInapplicable": "<bool>"
+                }
+              }
+            ],
+            "deliveryMethods": []
+          }
+        ],
+        "voucher": "<null>",
+        "loyalty": "<null>",
+        "fees": {
+          "values": [
+            {
+              "id": "<redacted>",
+              "type": "<redacted>",
+              "title": "<string>",
+              "description": "<string>",
+              "amount": "<number>",
+              "liabilities": [
+                {
+                  "id": "<redacted>",
+                  "name": "<string>",
+                  "amount": "<number>"
+                }
+              ]
+            }
+          ],
+          "enabled": "<bool>"
+        },
+        "currency": {
+          "name": "<string>",
+          "prefix": "<string>"
+        },
+        "summary": {
+          "total": "<number>",
+          "subTotal": "<number>",
+          "grossSubTotal": "<number>",
+          "deliveryFee": "<number>",
+          "originalDeliveryFee": "<number>",
+          "feeTotal": "<number>",
+          "benefitsTotal": "<number>",
+          "voucherTotal": "<number>",
+          "loyaltyTotal": "<number>",
+          "interestTotal": "<null>",
+          "totalWithInterest": "<null>",
+          "interestType": "<null>",
+          "benefits": [
+            {
+              "type": "<string>",
+              "value": "<number>"
+            }
+          ],
+          "missions": "<null>"
+        },
+        "status": "<string>",
+        "createdAt": "<redacted>",
+        "test": "<bool>",
+        "expiresAt": "<redacted>",
+        "evaluators": [
+          {
+            "id": "<string>",
+            "expiresAt": "<redacted>"
+          }
+        ],
+        "programs": [
+          {
+            "programId": "<string>",
+            "active": "<bool>",
+            "rule": "<string>"
+          }
+        ],
+        "governance": [],
+        "source": {
+          "name": "<string>",
+          "platform": "<string>",
+          "requester": "<string>",
+          "parameters": [
+            {
+              "name": "<string>",
+              "value": "<string>"
+            }
+          ]
+        },
+        "rewards": [],
+        "template": "<null>",
+        "hasAgeRestrictedItems": "<bool>"
+      },
+      "warning": "<null>",
+      "signature": "<redacted>"
+    },
+    "text": null
+  }
+}

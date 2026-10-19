@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:11:43.509Z",
+  "source": "inventory:post_www_ifood_com_br_site_api_v4_identity_providers",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/site-api/v4/identity-providers",
+    "body": {
+      "tenant_id": "IFO"
+    },
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/entrar",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": [
+      {
+        "name": "<string>"
+      }
+    ],
+    "text": null
+  }
+}

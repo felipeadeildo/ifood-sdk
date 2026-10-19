@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:13:18.771Z",
+  "source": "inventory:get_ifood_com_br_eng5outu",
+  "request": {
+    "method": "GET",
+    "url": "https://ifood.com.br/eng5outu/?id=<redacted>",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 301,
+    "headers": {
+      "server": "AmazonS3"
+    },
+    "json": null,
+    "text": null
+  }
+}

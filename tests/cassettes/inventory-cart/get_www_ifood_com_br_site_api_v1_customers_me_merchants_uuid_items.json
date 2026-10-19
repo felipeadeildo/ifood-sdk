@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:31.737Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v1_customers_me_merchants_uuid_items",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v1/customers/me/merchants/3808715c-c238-470e-8949-08a2b1f5a2e0/items",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/delivery/sao-paulo-sp/pizza-prime---campo-belo-campo-belo/3808715c-c238-470e-8949-08a2b1f5a2e0",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": [
+      {
+        "id": "<redacted>",
+        "code": "<redacted>",
+        "ean": "<string>",
+        "description": "<string>",
+        "logoUrl": "<redacted>",
+        "details": "<string>",
+        "needChoices": "<bool>",
+        "unitPrice": "<number>",
+        "unitOriginalPrice": "<number>",
+        "choices": [
+          {
+            "id": "<redacted>",
+            "code": "<redacted>",
+            "name": "<string>",
+            "min": "<number>",
+            "max": "<number>",
+            "availability": "<string>",
+            "garnishItens": [
+              {
+                "id": "<redacted>",
+                "code": "<redacted>",
+                "description": "<string>",
+                "details": "<string>",
+                "unitPrice": "<number>"
+              }
+            ]
+          }
+        ],
+        "availability": "<string>",
+        "discountPercentage": "<number>"
+      }
+    ],
+    "text": null
+  }
+}

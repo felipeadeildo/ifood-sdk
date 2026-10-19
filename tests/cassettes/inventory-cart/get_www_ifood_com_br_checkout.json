@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:27:46.473Z",
+  "source": "inventory:get_www_ifood_com_br_checkout",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/checkout",
+    "body": null,
+    "headers": {
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 403,
+    "headers": {
+      "content-type": "text/html; charset=UTF-8",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": "<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-wkGotvjnrbIPXZiqC4TvjZ&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-src-attr &#39;none&#39;; style-src &#39;unsafe-inline&#39;; img-src &#39;self&#39; https://challenges.cloudflare.com; connect-src &#39;self&#39; https://challenges.cloudflare.com; frame-src &#39;self&#39; https://challenges.cloudflare.com blob:; child-src &#39;self&#39; https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri &#39;self&#39;\"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem auto;padding-left:1.5rem;max-width:60rem}@media (width <= 720px){.main-content{margin-top:4rem}}#challenge-error-text{background-image:url(\"data:image/svg+xml;base64,<blob>+\");background-repeat:no-repeat;background-size:contain;padding-left:34px}</style><meta http-equiv=\"refresh\" content=\"360\"></head><body><div class=\"main-wrapper\" role=\"main\"><div class=\"main-content\"><noscript><div class=\"h2\"><span id=\"challenge-error-text\">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script nonce=\"wkGotvjnrbIPXZiqC4TvjZ\">(function(){window._cf_chl_opt = {cFPWv: 'b',cH: 'PWKt.<blob>.2.1.1-R47Y2ZQvdy8xW.I8AENLa7MbccI0OCs68Xh.k_s0DfLnLYKgOmNmm7wfAd.v1pdr',cITimeS: '1792380466',cN: 'wkGotvjnrbIPXZiqC4TvjZ',cRay: 'a4ccb05b898a1cf5',cTplC:0,cTplO:0,cTplV:5,cType: 'managed',cUPMDTk:\"/checkout?__cf_chl_tk=kDR_Sth76aF25er.<blob>.0.1.1-3Bos.hbyLRgMID.SgReN9Sz_gnNhQyizeebWcvAWMgM\",cvId: '3',cZone: 'www.ifood.com.br',fa:\"/checkout?__cf_chl_f_tk=kDR_Sth76aF25er.<blob>.0.1.1-3Bos.hbyLRgMID.SgReN9Sz_gnNhQyizeebWcvAWMgM\",md: '<blob>.2.1.1-yaTKFkwcmYHbysHmceifFai.<blob>.<blob>.miZtfcYQ_uxOzHOAJ0PwZq2F7_dUbCOGiPj.B3QNBmZty_84GQ8WR.<blob>.<blob>.<blob>.<blob>.Rg6Gu2gVXULtqaFvfMs3ySteakgi.<blob>.<blob>.fKQlcUt2UwgJHt3jO8i4Za1Q.<blob>.<blob>.NwVsGrBFsuoMn',mdrd: '<blob>.2.1.<blob>.<blob>.<blob>.cRTHXZO2VxndCm3DJDxP2h7bEa_Oeb_.<blob>.hbW0JeBgukCV3YdaH3XQeUIsdIvr.r6Ja5KNUKuxCf78xSQeVO.<blob>.<blob>.<blob>.V60MeeCQ.GBv1VXjTCTEU2B.<blob>.N6BzkC.W21Jf1eKZzeeb3mlAG0Sm5iUPpkNWpq',};var a = document.createElement('script');a.nonce = 'wkGotvjnrbIPXZiqC4TvjZ';a.src = '/<blob>?ray=a4ccb05b898a1cf5';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,\"/checkout?__cf_chl_rt_tk=kDR_Sth76aF25er.<blob>.0.1.1-3Bos.hbyLRgMID.SgReN9Sz_gnNhQyizeebWcvAWMgM\"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script></body></html>"
+  }
+}

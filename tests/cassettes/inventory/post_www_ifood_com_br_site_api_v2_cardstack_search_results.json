@@ -1,0 +1,169 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:14:42.236Z",
+  "source": "inventory:post_www_ifood_com_br_site_api_v2_cardstack_search_results",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/site-api/v2/cardstack/search/results?alias=<redacted>&latitude=<redacted>&longitude=<redacted>&channel=IFOOD&size=20&term=<redacted>",
+    "body": {
+      "supported-headers": [
+        "OPERATION_HEADER"
+      ],
+      "supported-cards": [
+        "MERCHANT_LIST",
+        "CATALOG_ITEM_LIST",
+        "CATALOG_ITEM_LIST_V2",
+        "CATALOG_ITEM_LIST_V3",
+        "FEATURED_MERCHANT_LIST",
+        "CATALOG_ITEM_CAROUSEL",
+        "CATALOG_ITEM_CAROUSEL_V2",
+        "CATALOG_ITEM_CAROUSEL_V3",
+        "BIG_BANNER_CAROUSEL",
+        "IMAGE_BANNER",
+        "MERCHANT_LIST_WITH_ITEMS_CAROUSEL",
+        "SMALL_BANNER_CAROUSEL",
+        "NEXT_CONTENT",
+        "MERCHANT_CAROUSEL",
+        "MERCHANT_TILE_CAROUSEL",
+        "SIMPLE_MERCHANT_CAROUSEL",
+        "INFO_CARD",
+        "MERCHANT_LIST_V2",
+        "ROUND_IMAGE_CAROUSEL",
+        "BANNER_GRID",
+        "MEDIUM_IMAGE_BANNER",
+        "MEDIUM_BANNER_CAROUSEL",
+        "RELATED_SEARCH_CAROUSEL",
+        "FILTER_CAROUSEL",
+        "RANKING_CONTENT_LIST",
+        "ADS_BANNER"
+      ],
+      "supported-actions": [
+        "catalog-item",
+        "item-details",
+        "merchant",
+        "page",
+        "card-content",
+        "last-restaurants",
+        "webmiddleware",
+        "reorder",
+        "search",
+        "groceries",
+        "groceries-details",
+        "home-tab"
+      ],
+      "supported-filters": [
+        "DEFAULT_SORTING",
+        "DISTANCE_FILTER",
+        "QUICK_FILTER_DELIVERY_FEE",
+        "QUICK_FILTER_IFOOD_DELIVERY",
+        "QUICK_FILTER_SUPER_RESTAURANT",
+        "QUICK_FILTER_ONLINE_VR",
+        "QUICK_FILTER_MERCHANT_TYPE",
+        "QUICK_FILTER_STORE_TYPE",
+        "QUICK_FILTER_TAKEOUT",
+        "QUICK_FILTER_TOTAL_PRICE",
+        "QUICK_FILTER_DELIVERY_TIME",
+        "KEYWORD_TOGGLE",
+        "QUICK_FILTER_PROMOTION",
+        "SINGLE_SELECT_GRID",
+        "SINGLE_SELECT_RADIO",
+        "SINGLE_SELECT_WORDCLOUD",
+        "MULTI_SELECT_CHECK",
+        "SLIDER",
+        "TOGGLE"
+      ],
+      "feed-feature-name": "",
+      "faster-overrides": ""
+    },
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/busca?q=<redacted>",
+      "country": "BR",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "id": "<redacted>",
+      "alias": "<redacted>",
+      "header": {
+        "title": "<string>"
+      },
+      "baseImageUrl": "<redacted>",
+      "sections": [
+        {
+          "id": "<redacted>",
+          "type": "<string>",
+          "header": {
+            "id": "<redacted>",
+            "headerType": "<string>",
+            "data": {
+              "isSticky": "<bool>",
+              "operations": [
+                {
+                  "sortOptions": [
+                    "<string>"
+                  ],
+                  "selected": "<string>",
+                  "type": "<string>"
+                }
+              ]
+            },
+            "cardMargins": {
+              "top": "<number>",
+              "bottom": "<number>"
+            }
+          },
+          "contentReferenceId": "<redacted>",
+          "cards": [
+            {
+              "id": "<redacted>",
+              "cardType": "<string>",
+              "data": {
+                "contents": [
+                  {
+                    "action": "<string>",
+                    "available": "<bool>",
+                    "currency": "<string>",
+                    "distance": "<number>",
+                    "id": "<redacted>",
+                    "imageUrl": "<redacted>",
+                    "isIfoodDelivery": "<bool>",
+                    "isFavorite": "<bool>",
+                    "isSuperRestaurant": "<bool>",
+                    "mainCategory": "<string>",
+                    "name": "<string>",
+                    "supportsTracking": "<bool>",
+                    "userRating": "<number>",
+                    "deliveryInfo": {
+                      "fee": "<number>",
+                      "timeMaxMinutes": "<number>",
+                      "timeMinMinutes": "<number>",
+                      "type": "<string>",
+                      "deliveryMode": "<string>"
+                    },
+                    "formattedContent": {
+                      "firstLine": "<string>",
+                      "secondLine": "<string>"
+                    },
+                    "isometricDistanceInMeters": "<number>"
+                  }
+                ]
+              },
+              "isPlaceholder": "<bool>"
+            }
+          ]
+        }
+      ]
+    },
+    "text": null
+  }
+}

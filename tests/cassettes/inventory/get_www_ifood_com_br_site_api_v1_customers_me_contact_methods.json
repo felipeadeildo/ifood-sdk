@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:12:59.077Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v1_customers_me_contact_methods",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v1/customers/me/contact-methods",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/entrar/otp-confirmacao?phone=<redacted>&otpKey=<redacted>&preference=WhatsApp&emailOrPhone=<redacted>&challengeEmail=<redacted>",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "contact_emails": "<redacted>",
+      "contact_telephones": [
+        {
+          "country_code": "<number>",
+          "area_code": "<number>",
+          "number": "<string>",
+          "verified_at": "<string>",
+          "verified": "<bool>",
+          "active": "<bool>",
+          "created_at": "<string>",
+          "full_number": "<string>"
+        }
+      ]
+    },
+    "text": null
+  }
+}

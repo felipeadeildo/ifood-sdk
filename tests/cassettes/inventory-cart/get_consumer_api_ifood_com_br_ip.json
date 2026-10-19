@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:30.689Z",
+  "source": "inventory:get_consumer_api_ifood_com_br_ip",
+  "request": {
+    "method": "GET",
+    "url": "https://consumer-api.ifood.com.br/ip",
+    "body": null,
+    "headers": {
+      "app_version": "9.178.5",
+      "referer": "https://www.ifood.com.br/",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+      "accept": "application/json, text/plain, */*"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json"
+    },
+    "json": {
+      "ip": "<redacted>"
+    },
+    "text": null
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:49.835Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v4_customers_me_orders",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v4/customers/me/orders?page=0&size=10",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/inicio",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": [
+      {
+        "id": "<redacted>",
+        "shortId": "<redacted>",
+        "orderNumber": "<string>",
+        "createdAt": "<string>",
+        "updatedAt": "<string>",
+        "closedAt": "<string>",
+        "lastStatus": "<string>",
+        "details": {
+          "mode": "<string>",
+          "scheduled": "<bool>",
+          "tippable": "<bool>",
+          "indoorTipEnabled": "<bool>",
+          "trackable": "<bool>",
+          "boxable": "<bool>",
+          "placedAtBox": "<bool>",
+          "reviewed": "<bool>",
+          "darkKitchen": "<bool>"
+        },
+        "delivery": {
+          "address": "<redacted>",
+          "estimatedTimeOfArrival": {
+            "deliversAt": "<string>",
+            "updatedAt": "<string>",
+            "deliversEndAt": "<string>"
+          },
+          "expectedDeliveryTime": "<string>",
+          "expectedDuration": "<number>",
+          "expectedDeliveryTimeEnd": "<string>",
+          "isFullService": "<bool>"
+        },
+        "deliveryOperation": {
+          "executions": [
+            {
+              "deliveryRequestId": "<redacted>",
+              "lastState": "<string>",
+              "lastStateAt": "<string>",
+              "timeline": [
+                {
+                  "events": []
+                }
+              ],
+              "deliveryParameters": {
+                "logisticProvider": "<string>",
+                "deliveryProduct": "<string>",
+                "code": "<string>",
+                "schedulingType": "<string>"
+              },
+              "source": {
+                "trigger": "<string>",
+                "triggerId": "<redacted>",
+                "requester": "<string>",
+                "requesterId": "<redacted>",
+                "reason": "<string>"
+              }
+            }
+          ]
+        },
+        "merchant": {
+          "address": "<redacted>",
+          "id": "<redacted>",
+          "name": "<string>",
+          "logo": "<redacted>",
+          "type": "<string>"
+        },
+        "payments": {
+          "methods": [
+            {
+              "id": "<redacted>",
+              "uniqueId": "<redacted>",
+              "method": {
+                "name": "<string>",
+                "description": "<string>"
+              },
+              "type": {
+                "name": "<string>",
+                "description": "<string>"
+              },
+              "brand": {
+                "id": "<redacted>",
+                "image": "<redacted>",
+                "name": "<string>",
+                "description": "<string>"
+              },
+              "digitalWallet": {
+                "id": "<redacted>",
+                "name": "<string>",
+                "description": "<string>",
+                "image": "<redacted>"
+              },
+              "amount": {
+                "currency": "<string>",
+                "value": "<number>"
+              },
+              "transactions": []
+            }
+          ],
+          "total": {
+            "currency": "<string>",
+            "value": "<number>"
+          }
+        },
+        "bag": {
+          "benefits": [
+            {
+              "type": "<string>",
+              "target": "<string>",
+              "targetId": "<string>",
+              "description": "<redacted>",
+              "value": "<number>",
+              "experienceType": "<string>"
+            }
+          ],
+          "deliveryFee": {
+            "value": "<number>",
+            "valueWithDiscount": "<number>"
+          },
+          "items": [
+            {
+              "id": "<redacted>",
+              "uniqueId": "<redacted>",
+              "externalId": "<redacted>",
+              "name": "<string>",
+              "description": "<string>",
+              "quantity": "<number>",
+              "subItems": [
+                {
+                  "id": "<redacted>",
+                  "externalId": "<redacted>",
+                  "name": "<string>",
+                  "quantity": "<number>",
+                  "tags": [],
+                  "totalPrice": "<number>",
+                  "totalPriceWithDiscount": "<number>",
+                  "unitPrice": "<number>",
+                  "unitPriceWithDiscount": "<number>"
+                }
+              ],
+              "tags": [],
+              "totalPrice": "<number>",
+              "totalPriceWithDiscount": "<number>",
+              "unitPrice": "<number>",
+              "unitPriceWithDiscount": "<number>",
+              "notes": "<string>",
+              "logoUrl": "<redacted>",
+              "attachments": []
+            }
+          ],
+          "subTotal": {
+            "value": "<number>",
+            "valueWithDiscount": "<number>"
+          },
+          "total": {
+            "value": "<number>",
+            "valueWithDiscount": "<number>"
+          },
+          "updated": "<bool>"
+        },
+        "origin": {
+          "platform": "<string>",
+          "appName": "<string>",
+          "appVersion": "<string>"
+        },
+        "deliveryMethod": {
+          "id": "<string>",
+          "mode": "<string>",
+          "timeSlot": {
+            "id": "<string>",
+            "startDateTime": "<string>",
+            "endDateTime": "<string>"
+          }
+        },
+        "fees": [
+          {
+            "id": "<redacted>",
+            "title": "<string>",
+            "description": "<string>",
+            "type": "<string>",
+            "amount": {
+              "currency": "<string>",
+              "value": "<number>"
+            }
+          }
+        ],
+        "salesChannel": "<string>",
+        "verificationCodes": "<redacted>"
+      }
+    ],
+    "text": null
+  }
+}

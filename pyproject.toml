@@ -1,64 +1,53 @@
 [project]
-name = "ifood-sdk-workspace"
+name = "ifood-sdk"
 version = "0.1.0"
-description = "Unofficial toolkit for the iFood consumer API: SDK, service and MCP server"
+description = "Unofficial Python client for the iFood consumer API"
 requires-python = ">=3.14"
-dependencies = ["ifood-sdk[mcp,api]"]
+dependencies = ["httpx", "pydantic", "pydantic-settings"]
+
+[project.optional-dependencies]
+mcp = ["mcp"]
+api = ["fastapi", "uvicorn"]
 
 [dependency-groups]
-dev = [
-    "ruff",
-    "ty",
-    "pytest",
-    "zensical",
-    "prek",
-]
+dev = ["ruff", "ty", "pytest", "zensical", "prek"]
 
-[tool.uv.workspace]
-members = ["packages/*"]
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.uv.sources]
-ifood-sdk = { workspace = true }
+[tool.hatch.build.targets.wheel]
+packages = ["src/ifood"]
 
-# lint & format (ruff)
 [tool.ruff]
 line-length = 100
 target-version = "py314"
-# research holds capture scripts, not shipped code
-extend-exclude = ["research", "packages/*/tests"]
+extend-exclude = ["research"]
 
 [tool.ruff.lint]
-select = [
-    "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings
-    "F",    # pyflakes
-    "I",    # import sorting
-    "UP",   # pyupgrade
-    "B",    # bugbear
-    "C4",   # comprehensions
-    "SIM",  # simplify
-    "RET",  # return statements
-    "PTH",  # pathlib
-    "RUF",  # ruff-specific
-    "ANN",  # annotations
-    "S",    # bandit
-    "T20",  # no print in library code
-]
+select = ["E", "W", "F", "I", "UP", "B", "C4", "SIM", "RET", "PTH", "RUF", "ANN", "S", "T20"]
 ignore = ["ANN401"]
 
 [tool.ruff.lint.per-file-ignores]
-"**/tests/**" = ["S101", "ANN", "E501", "RUF001", "RUF002", "RUF036", "SIM105", "T20"]
+"tests/**" = ["S101", "S105", "S106", "ANN", "E501", "RUF001", "RUF002", "RUF036", "SIM105", "T20"]
+# Constant names that mention tokens, not secrets: an env var name and two URL paths.
+"src/ifood/api/app.py" = ["S105"]
+"src/ifood/mcp/asgi.py" = ["S105"]
+"src/ifood/wire/endpoints.py" = ["S105"]
 
-# type checking (ty)
 [tool.ty.src]
-exclude = ["research", "packages/*/tests"]
+exclude = ["research", "tests"]
 
 [tool.ty.rules]
 possibly-missing-import = "warn"
 unused-ignore-comment = "warn"
 
 [tool.pytest.ini_options]
-testpaths = ["packages/sdk/tests"]
-pythonpath = ["packages/sdk", "packages/sdk/tests"]
+testpaths = ["tests"]
+pythonpath = ["src", "tests"]
 addopts = "-q"
-markers = ["live: talks to the real API (needs a session jar)"]
+markers = [
+    "live: talks to the real API (needs a session jar)",
+    "session: needs a saved session on disk",
+    "manual: a human has to run it",
+]

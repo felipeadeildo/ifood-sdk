@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:11:41.957Z",
+  "source": "inventory:get_www_ifood_com_br_static_manifest_robots_pt_br_manifest_webmanifest",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/static/manifest-robots/pt-BR/manifest.webmanifest",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/entrar",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/manifest+json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "name": "<string>",
+      "short_name": "<string>",
+      "background_color": "<string>",
+      "theme_color": "<string>",
+      "description": "<string>",
+      "lang": "<string>",
+      "start_url": "<string>",
+      "display": "<string>",
+      "orientation": "<string>",
+      "related_applications": [
+        {
+          "platform": "<string>",
+          "id": "<string>",
+          "url": "<string>"
+        }
+      ],
+      "icons": [
+        {
+          "src": "<redacted>",
+          "sizes": "<string>",
+          "type": "<string>",
+          "purpose": "<string>"
+        }
+      ]
+    },
+    "text": null
+  }
+}

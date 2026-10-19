@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:27:50.040Z",
+  "source": "inventory:post_www_ifood_com_br_eng5outu_ag_g_c",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/eng5outu/ag/g/c?v=<redacted>&tid=<redacted>&gtm=<redacted>&_p=<redacted>&gcd=<redacted>&npa=<redacted>&dma=<redacted>&gdid=<redacted>&_eu=<redacted>&_uip=<redacted>&cid=<redacted>&fp=<redacted>&frm=<redacted>&pscdl=<redacted>&rcb=<redacted>&sr=<redacted>&uaa=<redacted>&uab=<redacted>&uafvl=<redacted>&uam=<redacted>&uamb=<redacted>&uap=<redacted>&uapv=<redacted>&uaw=<redacted>&ul=<redacted>&ur=<redacted>&_gsid=<redacted>&gaf=<redacted>&_s=<redacted>&tag_exp=<redacted>&sid=<redacted>&sct=<redacted>&seg=<redacted>&dl=<redacted>&dr=<redacted>&dt=<redacted>&gtb=<redacted>&en=<redacted>&_ee=<redacted>&gap.gtb=<redacted>&tfd=<redacted>",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/checkout",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "content-type": "text/plain",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": ""
+  }
+}

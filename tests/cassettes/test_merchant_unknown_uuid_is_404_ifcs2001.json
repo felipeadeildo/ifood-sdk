@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:02:40+00:00",
+  "request": {
+    "method": "GET",
+    "url": "https://marketplace.ifood.com.br/v1/merchants/00000000-0000-4000-8000-000000000000?channel=IFOOD",
+    "headers": {
+      "app_name": "consumer_webapp",
+      "platform": "webapp",
+      "app_version": "9.178.5",
+      "country": "br",
+      "accept": "application/json",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-type": "application/json",
+      "x-ifood-error-code": "IFCS-2001",
+      "server": "cloudflare"
+    },
+    "json": {
+      "code": "IFCS-2001",
+      "message": "Merchant not found",
+      "details": [
+        "ids not found: [00000000-0000-4000-8000-000000000000]"
+      ],
+      "status": 404
+    },
+    "text": null
+  }
+}

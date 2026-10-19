@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:02:39+00:00",
+  "request": {
+    "method": "GET",
+    "url": "https://logistics-api.ifood.com.br/location/v1/addresses:geocode?query=Rua+Augusta%2C+S%C3%A3o+Paulo+-+SP",
+    "headers": {
+      "app_name": "consumer_webapp",
+      "platform": "webapp",
+      "app_version": "9.178.5",
+      "country": "br",
+      "accept": "application/json",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare",
+      "access-control-allow-origin": "*"
+    },
+    "json": {
+      "rules": [
+        {
+          "key": "city",
+          "localizedLabel": "Cidade",
+          "required": true
+        },
+        {
+          "key": "state",
+          "localizedLabel": "Estado",
+          "required": true
+        },
+        {
+          "key": "country",
+          "localizedLabel": "País",
+          "required": true
+        },
+        {
+          "key": "streetName",
+          "localizedLabel": "Rua",
+          "required": true
+        },
+        {
+          "key": "streetNumber",
+          "localizedLabel": "Número",
+          "required": false
+        },
+        {
+          "key": "neighborhood",
+          "localizedLabel": "Bairro",
+          "required": true
+        },
+        {
+          "key": "coordinates",
+          "localizedLabel": "Coordenadas",
+          "required": true
+        },
+        {
+          "key": "postalCode",
+          "localizedLabel": "CEP",
+          "required": true
+        },
+        {
+          "key": "complement",
+          "localizedLabel": "Complemento",
+          "required": false
+        },
+        {
+          "key": "reference",
+          "localizedLabel": "Ponto de referência",
+          "required": false
+        }
+      ],
+      "addresses": [
+        {
+          "city": "São Paulo",
+          "state": "SP",
+          "country": "BR",
+          "streetName": "R. Augusta",
+          "streetNumber": "1559",
+          "neighborhood": "Consolação",
+          "coordinates": {
+            "latitude": -23.5569581,
+            "longitude": -46.6589677
+          },
+          "postalCode": "01305-100",
+          "quality": {
+            "city": 1,
+            "state": 1,
+            "country": 1,
+            "streetName": 1,
+            "streetNumber": -1,
+            "neighborhood": 1,
+            "postalCode": 1,
+            "coordinates": {
+              "latitude": 1,
+              "longitude": 1
+            }
+          }
+        }
+      ],
+      "provider": "GOOGLE"
+    },
+    "text": null
+  }
+}

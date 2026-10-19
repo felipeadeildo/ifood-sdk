@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:12:02.033Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v2_categories",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v2/categories?latitude=<redacted>&longitude=<redacted>&channel=IFOOD",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/entrar/celular",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json; charset=utf-8",
+      "server": "cloudflare"
+    },
+    "json": {
+      "categories": [
+        {
+          "title": "<string>",
+          "type": "<string>",
+          "alias": "<string>"
+        }
+      ]
+    },
+    "text": null
+  }
+}

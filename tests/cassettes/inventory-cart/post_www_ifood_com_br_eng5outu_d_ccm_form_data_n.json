@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:26:24.556Z",
+  "source": "inventory:post_www_ifood_com_br_eng5outu_d_ccm_form_data_n",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/eng5outu/d/ccm/form-data/712406696?gtm=<redacted>&gcd=<redacted>&dma=<redacted>&tag_exp=<redacted>&rcb=<redacted>&did=<redacted>&gdid=<redacted>&npa=<redacted>&frm=<redacted>&pscdl=<redacted>&auid=<redacted>&uaa=<redacted>&uab=<redacted>&uafvl=<redacted>&uamb=<redacted>&uam=<redacted>&uap=<redacted>&uapv=<redacted>&uaw=<redacted>&ec_mode=<redacted>&ecsid2=<redacted>&gtb=<redacted>&gap.gtb=<redacted>&fmt=<redacted>&_uip=<redacted>&emd=<redacted>&ecsid=<redacted>&eme=<redacted>&gap.ch=<redacted>",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/delivery/sao-paulo-sp/mcdonald's-pamplona-(plo)-jardim-paulista/0a0d6cdd-f04f-4909-aae6-fabb497f08b7",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "content-type": "text/plain",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": null
+  }
+}

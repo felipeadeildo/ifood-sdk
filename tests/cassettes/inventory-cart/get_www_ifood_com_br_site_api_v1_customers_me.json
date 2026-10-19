@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:30.735Z",
+  "source": "inventory:get_www_ifood_com_br_site_api_v1_customers_me",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/site-api/v1/customers/me",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/delivery/sao-paulo-sp/pizza-prime---campo-belo-campo-belo/3808715c-c238-470e-8949-08a2b1f5a2e0",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "club": {
+        "tags": [
+          "<string>"
+        ]
+      },
+      "user-data-attributes": {
+        "user_lifecycle_v2": "<number>",
+        "user_lifecycle": "<number>"
+      },
+      "account": {
+        "id": "<redacted>",
+        "external_id": "<redacted>",
+        "name": "<redacted>",
+        "tax_payer_identification_number": "<redacted>",
+        "phone": "<redacted>",
+        "email": "<redacted>",
+        "language": "<string>",
+        "registration_date": "<string>",
+        "tenant_id": "<string>",
+        "active": "<bool>",
+        "test_scope": "<null>",
+        "blocked_to_create_account": "<bool>",
+        "user_type": "<string>",
+        "not_publish_when_create": "<bool>",
+        "blocked_by_user": "<bool>",
+        "passport_country": "<null>",
+        "passport_number": "<null>",
+        "is_foreign_account": "<bool>",
+        "is_adult": "<null>",
+        "personal_data_origin": "<null>"
+      },
+      "tags": [
+        "<string>"
+      ]
+    },
+    "text": null
+  }
+}

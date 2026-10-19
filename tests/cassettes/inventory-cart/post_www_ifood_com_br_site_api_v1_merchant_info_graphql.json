@@ -1,0 +1,184 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:30.730Z",
+  "source": "inventory:post_www_ifood_com_br_site_api_v1_merchant_info_graphql",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/site-api/v1/merchant-info/graphql?latitude=<redacted>&longitude=<redacted>&channel=IFOOD",
+    "body": {
+      "query": "query ($merchantId: String!) { merchant (merchantId: $merchantId, required: true) { available availableForScheduling contextSetup { catalogGroup context regionGroup } currency deliveryFee { originalValue type value } deliveryMethods { catalogGroup deliveredBy id maxTime minTime mode originalValue priority schedule { now shifts { dayOfWeek endTime interval startTime } timeSlots { availableLoad date endDateTime endTime id isAvailable originalPrice price startDateTime startTime } } subtitle title type value state } deliveryTime distance features id mainCategory { code name } minimumOrderValue name paymentCodes preparationTime priceRange resources { fileName type } slug tags takeoutTime userRating } merchantExtra (merchantId: $merchantId, required: false) { address { city country district latitude longitude state streetName streetNumber timezone zipCode } categories { code description friendlyName } companyCode configs { bagItemNoteLength chargeDifferentToppingsMode nationalIdentificationNumberRequired orderNoteLength } deliveryTime description documents { CNPJ { type value } MCC { type value } } enabled features groups { externalId id name type } id locale mainCategory { code description friendlyName } merchantChain { externalId id name } metadata { ifoodClub { banner { action image priority title } } } minimumOrderValue minimumOrderValueV2 name phoneIf priceRange resources { fileName type } shifts { dayOfWeek duration start } shortId tags takeoutTime test type userRatingCount } }",
+      "variables": {
+        "merchantId": "<redacted>"
+      }
+    },
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/delivery/sao-paulo-sp/pizza-prime---campo-belo-campo-belo/3808715c-c238-470e-8949-08a2b1f5a2e0",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "cloudflare"
+    },
+    "json": {
+      "data": {
+        "merchant": {
+          "available": "<bool>",
+          "availableForScheduling": "<bool>",
+          "contextSetup": {
+            "catalogGroup": "<redacted>",
+            "context": "<string>",
+            "regionGroup": "<redacted>"
+          },
+          "currency": "<string>",
+          "deliveryMethods": [
+            {
+              "catalogGroup": "<redacted>",
+              "deliveredBy": "<string>",
+              "id": "<string>",
+              "maxTime": "<number>",
+              "minTime": "<number>",
+              "mode": "<string>",
+              "priority": "<number>",
+              "schedule": {
+                "now": "<bool>",
+                "shifts": [],
+                "timeSlots": []
+              },
+              "state": "<string>",
+              "subtitle": "<string>",
+              "title": "<string>",
+              "type": "<string>",
+              "value": "<number>"
+            }
+          ],
+          "deliveryTime": "<number>",
+          "distance": "<number>",
+          "features": [
+            "<string>"
+          ],
+          "id": "<redacted>",
+          "mainCategory": {
+            "code": "<string>",
+            "name": "<string>"
+          },
+          "minimumOrderValue": "<number>",
+          "name": "<string>",
+          "paymentCodes": [
+            "<string>"
+          ],
+          "preparationTime": "<number>",
+          "priceRange": "<string>",
+          "resources": [
+            {
+              "fileName": "<redacted>",
+              "type": "<string>"
+            }
+          ],
+          "slug": "<redacted>",
+          "tags": [
+            "<string>"
+          ],
+          "takeoutTime": "<number>",
+          "userRating": "<number>"
+        },
+        "merchantExtra": {
+          "address": "<redacted>",
+          "categories": [
+            {
+              "code": "<string>",
+              "description": "<string>",
+              "friendlyName": "<string>"
+            }
+          ],
+          "companyCode": "<string>",
+          "configs": {
+            "bagItemNoteLength": "<string>",
+            "chargeDifferentToppingsMode": "<string>",
+            "nationalIdentificationNumberRequired": "<bool>",
+            "orderNoteLength": "<string>"
+          },
+          "deliveryTime": "<number>",
+          "description": "<string>",
+          "documents": {
+            "CNPJ": {
+              "type": "<string>",
+              "value": "<string>"
+            },
+            "MCC": {
+              "type": "<string>",
+              "value": "<string>"
+            }
+          },
+          "enabled": "<bool>",
+          "features": [
+            "<string>"
+          ],
+          "groups": [
+            {
+              "externalId": "<redacted>",
+              "id": "<redacted>",
+              "name": "<string>",
+              "type": "<string>"
+            }
+          ],
+          "id": "<redacted>",
+          "locale": "<string>",
+          "mainCategory": {
+            "code": "<string>",
+            "description": "<string>",
+            "friendlyName": "<string>"
+          },
+          "merchantChain": {
+            "externalId": "<redacted>",
+            "id": "<redacted>",
+            "name": "<string>"
+          },
+          "metadata": {
+            "ifoodClub": {
+              "banner": {
+                "action": "<string>",
+                "image": "<redacted>",
+                "priority": "<string>",
+                "title": "<string>"
+              }
+            }
+          },
+          "minimumOrderValue": "<number>",
+          "minimumOrderValueV2": "<number>",
+          "name": "<string>",
+          "phoneIf": "<string>",
+          "priceRange": "<string>",
+          "resources": [
+            {
+              "fileName": "<redacted>",
+              "type": "<string>"
+            }
+          ],
+          "shifts": [
+            {
+              "dayOfWeek": "<string>",
+              "duration": "<number>",
+              "start": "<string>"
+            }
+          ],
+          "shortId": "<redacted>",
+          "tags": [
+            "<string>"
+          ],
+          "takeoutTime": "<number>",
+          "test": "<string>",
+          "type": "<string>",
+          "userRatingCount": "<number>"
+        }
+      }
+    },
+    "text": null
+  }
+}

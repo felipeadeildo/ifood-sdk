@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:02:39+00:00",
+  "request": {
+    "method": "GET",
+    "url": "https://logistics-api.ifood.com.br/location/v1/addresses:geocode?query=asdkjhasd+qweqwe+9999+zzz",
+    "headers": {
+      "app_name": "consumer_webapp",
+      "platform": "webapp",
+      "app_version": "9.178.5",
+      "country": "br",
+      "accept": "application/json",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-type": "application/json",
+      "x-ifood-error-code": "IFSL-2002",
+      "server": "cloudflare",
+      "access-control-allow-origin": "*"
+    },
+    "json": {
+      "code": "IFSL-2002",
+      "message": "A consulta de endereços não retornou resultados.",
+      "localizedMessage": "A consulta de endereços não retornou resultados.",
+      "details": [
+        "Error when calling provider HERE."
+      ]
+    },
+    "text": null
+  }
+}

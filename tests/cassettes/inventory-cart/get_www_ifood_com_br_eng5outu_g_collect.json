@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:24:48.709Z",
+  "source": "inventory:get_www_ifood_com_br_eng5outu_g_collect",
+  "request": {
+    "method": "GET",
+    "url": "https://www.ifood.com.br/eng5outu/g/collect?v=<redacted>&tid=<redacted>&gtm=<redacted>&_p=<redacted>&gcd=<redacted>&npa=<redacted>&dma=<redacted>&gdid=<redacted>&ecid=<redacted>&_eu=<redacted>&_fplc=<redacted>&cid=<redacted>&frm=<redacted>&pscdl=<redacted>&rcb=<redacted>&sr=<redacted>&uaa=<redacted>&uab=<redacted>&uafvl=<redacted>&uam=<redacted>&uamb=<redacted>&uap=<redacted>&uapv=<redacted>&uaw=<redacted>&ul=<redacted>&ur=<redacted>&sst.gch=<redacted>&sst.etld=<redacted>&sst.tft=<redacted>&sst.lpc=<redacted>&sst.navt=<redacted>&sst.ude=<redacted>&sst.sw_exp=<redacted>&gaf=<redacted>&_s=<redacted>&tag_exp=<redacted>&sid=<redacted>&sct=<redacted>&seg=<redacted>&dl=<redacted>&dt=<redacted>&gtb=<redacted>&_tu=<redacted>&en=<redacted>&gap.sstd=<redacted>&gap.gtb=<redacted>&tfd=<redacted>&richsstsse=<redacted>",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/inicio",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "content-type": "text/plain",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": ""
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:28:05.262Z",
+  "source": "inventory:get_payment_ifood_com_br_v1_customers_me_card_tokens",
+  "request": {
+    "method": "GET",
+    "url": "https://payment.ifood.com.br/v1/customers/me/card-tokens",
+    "body": null,
+    "headers": {
+      "app_name": "consumer_webapp",
+      "accept": "application/json, text/plain, */*",
+      "platform": "Desktop",
+      "referer": "https://www.ifood.com.br/",
+      "country": "br",
+      "app_version": "9.178.5",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "content-type": "application/json",
+      "server": "ifood-mesh"
+    },
+    "json": [],
+    "text": null
+  }
+}

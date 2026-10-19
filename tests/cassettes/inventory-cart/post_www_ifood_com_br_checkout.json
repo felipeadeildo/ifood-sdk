@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:27:48.208Z",
+  "source": "inventory:post_www_ifood_com_br_checkout",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/checkout",
+    "body": {
+      "c2c3f4c63e09c55960a057ac794b5455fd230b3b311eb03273661135df848e7b": "<redacted>",
+      "2c3b99f02795f850245759deac0989d78473f70576a144d3c8dc19b21d00f4f5": "<redacted>",
+      "184572cec613bf155ff8580be614fb440a513c88eb4545d6e6490b9247970a9f": "<redacted>"
+    },
+    "headers": {
+      "referer": "https://www.ifood.com.br/checkout?__cf_chl_tk=<redacted>",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {
+      "content-type": "text/html; charset=utf-8",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": ""
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "recorded_at": "2026-10-19T03:36:42.040Z",
+  "source": "inventory:post_www_ifood_com_br_eng5outu_as_p_c_n",
+  "request": {
+    "method": "POST",
+    "url": "https://www.ifood.com.br/eng5outu/as/p/c/765500931/?random=<redacted>&cv=<redacted>&fst=<redacted>&fmt=<redacted>&bg=<redacted>&guid=<redacted>&async=<redacted>&en=<redacted>&gtm=<redacted>&gcd=<redacted>&dma=<redacted>&tag_exp=<redacted>&u_w=<redacted>&u_h=<redacted>&url=<redacted>&ref=<redacted>&rcb=<redacted>&evjid=<redacted>&label=<redacted>&frm=<redacted>&tiba=<redacted>&did=<redacted>&gdid=<redacted>&bttype=<redacted>&value=<redacted>&hn=<redacted>&npa=<redacted>&pscdl=<redacted>&auid=<redacted>&uaa=<redacted>&uab=<redacted>&uafvl=<redacted>&uamb=<redacted>&uam=<redacted>&uap=<redacted>&uapv=<redacted>&uaw=<redacted>&oid=<redacted>&oidsrc=<redacted>&ecsid=<redacted>&_tu=<redacted>&gtb=<redacted>&gcl_ctr=<redacted>&gap.gtb=<redacted>&category=<redacted>&ept=<redacted>&epp=<redacted>",
+    "body": null,
+    "headers": {
+      "referer": "https://www.ifood.com.br/restaurantes",
+      "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36"
+    }
+  },
+  "response": {
+    "status": 204,
+    "headers": {
+      "content-type": "text/html",
+      "server": "cloudflare"
+    },
+    "json": null,
+    "text": ""
+  }
+}
