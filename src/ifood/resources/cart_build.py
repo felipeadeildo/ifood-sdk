@@ -13,6 +13,7 @@ Sending one where the other is expected returns CART-007. The builder therefore 
 version as a required argument instead of guessing.
 """
 
+import json
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from typing import Any, Literal
@@ -325,3 +326,37 @@ def _as_dict(value: Address | JsonObject | None, name: str) -> JsonObject:
     if isinstance(value, dict):
         return value
     return value.model_dump(by_alias=True, exclude_none=True)
+
+
+def build_checkout(
+    cart: dict[str, Any],
+    *,
+    cpf_cnpj: str,
+    fingerprints: dict[str, str] | None = None,
+) -> JsonObject:
+    """Build the checkout body from a cart read.
+
+    `cart` is the payload from `GET /v2/carts/{id}`. The signature travels twice: once at
+    the top and once inside `cartRequest`, which is a JSON string, not an object.
+    """
+    cart_response = cart.get("cartResponse") or {}
+    signature = str(cart.get("signature") or "")
+    methods = cart_response.get("paymentMethods") or []
+    if not methods:
+        raise CartPayloadError("CART-006", "paymentMethod", "the cart has no payment method")
+    total = (cart_response.get("summary") or {}).get("total")
+    source: JsonObject = {
+        "source": "TOKEN",
+        "paymentMethod": methods[0],
+        "amount": {"value": total, "currency": "BRL"},
+        "additionalData": {},
+    }
+    context: JsonObject = {"tags": "delivered_by_ifood"}
+    if fingerprints:
+        context.update(fingerprints)
+    return {
+        "paymentSources": {"sources": [source], "contextInfo": context},
+        "cpfCnpj": cpf_cnpj,
+        "signature": signature,
+        "cartRequest": json.dumps({"cartResponse": cart_response, "signature": signature}),
+    }

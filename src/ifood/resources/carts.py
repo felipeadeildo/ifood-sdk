@@ -8,7 +8,7 @@ import json
 from collections.abc import Callable, Sequence
 
 from ..models import Address, CartResponse, CheckoutResult, Merchant
-from ..types import JsonObject
+from ..types import JsonObject, as_object
 from ..wire import endpoints
 from ..wire.transport import Transport
 from .cart_build import (
@@ -17,6 +17,7 @@ from .cart_build import (
     CartItem,
     CartPayloadError,
     CartVersion,
+    build_checkout,
     build_payload,
     draft_from,
 )
@@ -101,6 +102,21 @@ class Carts:
 
     def remove_voucher(self, cart_id: str) -> None:
         self._t.request("DELETE", endpoints.CART_VOUCHER.format(cart_id=cart_id))
+
+    def place_order(
+        self,
+        cart_id: str,
+        *,
+        cpf_cnpj: str,
+        fingerprints: dict[str, str] | None = None,
+    ) -> CheckoutResult:
+        """Read the cart, build the checkout body and send it.
+
+        Returns the order id and the Pix code.
+        """
+        cart = self._t.get(endpoints.CART_BY_ID.format(cart_id=cart_id))
+        body = build_checkout(as_object(cart), cpf_cnpj=cpf_cnpj, fingerprints=fingerprints)
+        return self.checkout(cart_id, body)
 
     def checkout(self, cart_id: str, payload: JsonObject) -> CheckoutResult:
         """Finalises the order. `payload["cartRequest"]` is a JSON *string*, not an object.

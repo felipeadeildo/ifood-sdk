@@ -35,5 +35,9 @@ The mobile catalog route answers `Request integrity check failed`, so it needs t
 
 ## Checkout
 
-`POST /site-api/v2/carts/{id}/checkout` was verified once through the site with a real Pix
-order. It has not been replayed from plain HTTP, so treat it as unverified in this client.
+`POST /site-api/v2/carts/{id}/checkout` works over plain HTTP with a fresh session. The
+request is 25 KB because `cartRequest` is a JSON string holding the whole cart response, and
+the signature appears twice: at the top and inside that string. The response carries
+`orderId`, `pixQRCode` and the cart snapshot.
+
+The order stays `CREATED` until the Pix is paid, so a checkout alone does not charge.
