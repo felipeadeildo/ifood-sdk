@@ -3,7 +3,7 @@ name = "ifood-sdk-workspace"
 version = "0.1.0"
 description = "Unofficial toolkit for the iFood consumer API: SDK, service and MCP server"
 requires-python = ">=3.14"
-dependencies = ["ifood-sdk"]
+dependencies = ["ifood-sdk[mcp,api]"]
 
 [dependency-groups]
 dev = [
@@ -19,7 +19,6 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 ifood-sdk = { workspace = true }
-ifood-mcp = { workspace = true }
 
 # lint & format (ruff)
 [tool.ruff]
@@ -59,7 +58,7 @@ possibly-missing-import = "warn"
 unused-ignore-comment = "warn"
 
 [tool.pytest.ini_options]
-testpaths = ["packages/sdk/tests", "packages/mcp/tests"]
-pythonpath = ["packages/sdk", "packages/sdk/tests", "packages/mcp", "packages/mcp/src"]
+testpaths = ["packages/sdk/tests"]
+pythonpath = ["packages/sdk", "packages/sdk/tests"]
 addopts = "-q"
 markers = ["live: talks to the real API (needs a session jar)"]

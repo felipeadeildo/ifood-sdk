@@ -17,7 +17,7 @@ from starlette.types import ASGIApp, Receive, Scope, Send
 
 from .server import build_server
 
-TOKEN_ENV = "IFOOD_MCP_TOKEN"  # noqa: S105 - name of the variable, not a secret
+TOKEN_ENV = "IFOOD_MCP_TOKEN"
 
 
 class BearerAuth:

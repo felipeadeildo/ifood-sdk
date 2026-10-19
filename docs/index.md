@@ -5,14 +5,10 @@ service rather than from documentation guesses. Source and issues live in
 [felipeadeildo/ifood-sdk](https://github.com/felipeadeildo/ifood-sdk).
 
 ```bash
-git clone https://github.com/felipeadeildo/ifood-sdk
-cd ifood-sdk && uv sync --all-groups
+pip install ifood-sdk          # the client
+pip install "ifood-sdk[mcp]"   # plus the MCP server
+pip install "ifood-sdk[api]"   # plus the HTTP service
 ```
-
-!!! warning "Not affiliated with iFood"
-
-    This is an independent client, built for study and personal use on your own account.
-    It does not bypass authentication. Read the [disclaimer](disclaimer.md) before using it.
 
 ```python
 import ifood
@@ -24,6 +20,22 @@ client.verify("123456")     # session saved to ~/.config/ifood-sdk/session.json
 for order in client.orders.recent(3):
     print(order.number, order.status, order.merchant.name)
 ```
+
+!!! warning "Not affiliated with iFood"
+
+    This is an independent client, built for study and personal use on your own account.
+    It does not bypass authentication. Read the [disclaimer](disclaimer.md) before using it.
+
+## Three ways to use it
+
+| You want | Install | Entry point |
+|---|---|---|
+| a Python client | `ifood-sdk` | `ifood.Client` |
+| tools for an agent | `ifood-sdk[mcp]` | `python -m ifood.mcp` |
+| an HTTP service | `ifood-sdk[api]` | `uvicorn ifood.api:build_app --factory` |
+
+All three share one implementation. The MCP server and the HTTP service call the same
+operations, so a fix in one lands in the other.
 
 ## What you can do
 
@@ -45,21 +57,9 @@ as unavailable from plain HTTP.
 
 ## Next steps
 
-- [Install](guides/install.md) the workspace and run the checks.
+- [Install](guides/install.md) with the extras you need.
 - [Log in](guides/login.md) and keep the session.
 - [Read orders](guides/orders.md) and repeat the last one.
-- [Build a cart](guides/cart.md) and see why sending it needs a browser.
+- [Serve MCP](guides/mcp.md) to an agent.
+- [Serve HTTP](guides/api.md) to other machines.
 - [Client reference](reference/client.md) for every method.
-
-## Why measurements instead of assumptions
-
-Each fact in this documentation names how it was established. An endpoint marked measured
-was seen answering on the wire. One marked unknown was not, and the client either refuses
-it or raises the edge error instead of pretending. The capture files and the decompiled app
-live in `research/`, outside the published package.
-
-<div align="center" markdown>
-<a href="https://adeildo.dev"><img src="assets/cat.svg" width="44" alt="A cat asleep on a laptop, the adeildo.dev logo"></a>
-
-<sub>Brought to you by <a href="https://adeildo.dev">adeildo.dev</a></sub>
-</div>

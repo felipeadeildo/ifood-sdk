@@ -15,7 +15,8 @@
 | Delivery code | `order.delivery_code` | four digits for the courier |
 | Reorder | `client.orders.reorder(order, latitude=…, longitude=…)` | previous bag |
 | Cart payload | `client.carts.build(merchant_id=…, …)` | validated, no network |
-| MCP server | `uv run --project packages/mcp python -m ifood_mcp` | seven tools, stdio or HTTP |
+| MCP server | `uv run python -m ifood.mcp` | seven tools, stdio or HTTP |
+| HTTP service | `uvicorn ifood.api:build_app --factory` | seven routes, bearer token |
 
 ## Blocked
 
@@ -32,7 +33,8 @@
 | Item | Why | Effort |
 |---|---|---|
 | `ifood-api` | let other machines use the flows | small |
-| `ifood-mcp` (started) | seven tools, auth over HTTP; needs OAuth for public use | small |
+| `ifood-mcp` | seven tools, token-protected HTTP; needs OAuth for public use | done |
+| `ifood-api` | seven routes, token-protected; needs OAuth and per-user sessions | done |
 | E-mail OTP | second login path | needs measurement |
 | Social login | third login path | needs measurement |
 | Token refresh | sessions last 2 h | small, needs a live test |

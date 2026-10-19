@@ -1,37 +1,45 @@
 # Architecture
 
-## Three products
+## One distribution, three surfaces
 
-`sdk` holds the measured contract: routes, headers, retries, error envelopes, payload
-shapes. `api` wraps it so other machines can call the flows without embedding Python.
-`mcp` exposes the flows as tools for an agent.
+`ifood-sdk` is a single package with extras:
 
-The dependency direction is one way: `api` and `mcp` import `sdk`, never the reverse. The
-SDK never imports a web framework.
+- `ifood` is the client. It owns the measured wire contract: routes, headers, retries,
+  error envelopes, payload shapes.
+- `ifood.ops` holds the operations both surfaces expose, so there is one implementation.
+- `ifood.mcp` is the MCP server, behind the `mcp` extra.
+- `ifood.api` is the FastAPI service, behind the `api` extra.
 
-## Why not write once and bind everywhere
+The dependency direction is one way: `mcp` and `api` import `ops`, `ops` imports the
+client, and the client imports nothing from either surface. The client never imports a web
+framework.
 
-Sharing an implementation across languages sounds cheaper than it is. The parts that
-differ (HTTP stacks, error types, async models) are exactly the parts that matter, and a
-shared core hides them behind a translation layer that fails in new ways.
+## Why extras instead of separate packages
 
-The practical version of "one source" is one OpenAPI document generated from the Python
-models, with generated TypeScript types for the worker. The behaviour stays in Python.
+Three distributions mean three versions to keep in step and three import names to remember.
+An extra keeps the base install small (`pip install ifood-sdk` pulls only `httpx`,
+`pydantic` and `pydantic-settings`) while leaving one version number and one namespace.
 
-## If the MCP server runs on Cloudflare
+## Why not generate the MCP server from the API spec
 
-Cloudflare's Agents SDK ships `McpAgent`, an MCP server backed by a Durable Object with
-Streamable HTTP transport and WebSocket hibernation. That is the right host for session
-state, because a session here is a jar that expires in minutes and must survive between
-agent calls.
+FastMCP can turn an OpenAPI document into MCP tools, and it is a good tool for wrapping a
+service you did not write. Here it would replace seven tools with names, descriptions and
+return shapes chosen for a generic client: `repeat_last_order` would become a `POST` with a
+path parameter, and the warning about a diverged order would disappear into a payload.
 
-What it must not do is reimplement the client. Keep the worker to transport, session
-storage and tool schemas, and let `ifood-api` do the calls. Two implementations of the
-same wire contract is how the two drift.
+The operations are the product, so they are named and typed by hand, and both surfaces are
+thin wrappers over them.
 
 ## Session model
 
 A browser mints the edge cookies once; the SDK reuses them for reads. Writes need the
-browser that minted the session, because Cloudflare challenges any other TLS. That makes
-a session keeper a requirement, not a convenience: it refreshes the jar and performs the
-writes. Everything else stays plain HTTP.
+browser that minted the session, because Cloudflare challenges any other TLS. That is why
+the surfaces stop at reading and at building a payload, and why a session keeper is a
+requirement for anyone who wants to write, not a convenience.
+
+## If the MCP server runs on Cloudflare
+
+Cloudflare's Agents SDK ships `McpAgent`, an MCP server backed by a Durable Object with
+Streamable HTTP transport and WebSocket hibernation. The worker should stay thin: hold the
+session in the object and call the HTTP service. Two implementations of the same wire
+contract is how the two drift.
