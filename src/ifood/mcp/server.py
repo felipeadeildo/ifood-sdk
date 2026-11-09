@@ -1,8 +1,8 @@
 """Tools exposed to an agent.
 
-Every tool is a read or a payload builder. Nothing here places an order: the iFood web API
-refuses writes from any client whose TLS did not mint the session, so the honest surface is
-reading and preparing.
+Reads use the saved session. Writes work only while the session is fresh: the platform
+refuses them from any client whose TLS did not mint the session, which is why the tools
+that send a cart need the browser-minted jar.
 """
 
 from typing import Any
@@ -15,9 +15,10 @@ from .. import ops
 SERVER_NAME = "ifood"
 INSTRUCTIONS = """Unofficial client for the iFood consumer API.
 
-Reads work with the user's saved session. Writes do not: the platform refuses them from
-anything but the browser that created the session. So this server reads order history,
-tracks deliveries, and builds a cart payload that the user sends in the app.
+Reads work with the user's saved session. Cart writes and checkout work only while that
+session is fresh; the platform refuses them from anything but the browser that created
+it. Voucher coupons are applied to a cart with a token from list_vouchers, and the token
+rotates on every listing call.
 """
 
 
@@ -94,6 +95,23 @@ def build_server() -> MCPServer[Any]:
     def merchant_lookup(merchant_id: str) -> dict[str, Any]:
         """Merchant name, status and minimum order. Needs no session."""
         return ops.merchant_lookup(merchant_id)
+
+    @mcp.tool()
+    def list_vouchers(
+        latitude: float, longitude: float, distance_km: float = 10.0
+    ) -> dict[str, Any]:
+        """Voucher wallet: code, status and conditions, plus the token to apply one."""
+        return ops.list_vouchers(latitude=latitude, longitude=longitude, distance_km=distance_km)
+
+    @mcp.tool()
+    def apply_voucher(
+        cart_id: str,
+        token: str,
+        code: str | None = None,
+        campaign_id: str | None = None,
+    ) -> dict[str, Any]:
+        """Apply a voucher to the cart; `token` comes from list_vouchers."""
+        return ops.apply_voucher(cart_id, token, code=code, campaign_id=campaign_id)
 
     @mcp.tool()
     def repeat_last_order(order_id: str | None = None) -> dict[str, Any]:

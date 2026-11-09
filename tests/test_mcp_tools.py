@@ -49,6 +49,8 @@ def test_tools_are_listed() -> None:
         "place_order",
         "merchant_items",
         "merchant_lookup",
+        "list_vouchers",
+        "apply_voucher",
         "repeat_last_order",
     ]
 

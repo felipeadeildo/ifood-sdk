@@ -18,6 +18,8 @@ That speaks MCP over stdio, which is how a local host launches it. The tools:
 | `get_order` | one order: status, merchant, items, fees, payment |
 | `track_order` | status, arrival window, event timeline, delivery code |
 | `merchant_lookup` | merchant name, status, minimum order |
+| `list_vouchers` | voucher wallet: code, conditions, and the token to apply one |
+| `apply_voucher` | apply a coupon to a cart, returns the discounted cart |
 | `repeat_last_order` | validated cart payload plus what changed |
 
 `repeat_last_order` is the case the project exists for. It builds the payload; sending it
@@ -30,9 +32,12 @@ created the session.
 IFOOD_MCP_TOKEN=secret uv run uvicorn ifood.mcp.asgi:build_app --factory
 ```
 
-`GET /health` answers without a token, and everything under `/mcp` requires
-`Authorization: Bearer <token>`. Without `IFOOD_MCP_TOKEN` the app still runs, so bind it to
-loopback and never expose it.
+This speaks Streamable HTTP. Clients connect to `http://host:8000/mcp`. The same MCP server
+also rides inside the REST service: `uvicorn ifood.api:build_app --factory` mounts it at
+`/mcp`, where the token defaults to `IFOOD_API_TOKEN` when `IFOOD_MCP_TOKEN` is unset.
+
+The MCP endpoint requires `Authorization: Bearer <token>`. Without a token the app still
+runs, so bind it to loopback and never expose it.
 
 For a public deployment the next step is OAuth 2.1: the MCP Python SDK expects a
 `TokenVerifier`, and the token should be validated by a library, not by hand.

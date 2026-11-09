@@ -1,12 +1,14 @@
-"""A small FastAPI service over the SDK.
+"""A small FastAPI service over the SDK, with the MCP server mounted at `/mcp`.
 
-Reads work with the saved session. The one write-shaped route builds a cart payload and
-stops, for the same reason the MCP tools stop: the platform refuses writes from anything
+Reads work with the saved session. The write-shaped routes build a cart payload and
+stop, for the same reason the MCP tools stop: the platform refuses writes from anything
 but the browser that created the session.
 """
 
 import hmac
 import os
+from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
 from typing import Any
 
 from fastapi import Depends, FastAPI, HTTPException, Request, status
@@ -14,8 +16,10 @@ from fastapi.responses import JSONResponse
 
 from .. import ops
 from ..errors import IfoodError
+from ..mcp import asgi as mcp_asgi
 
 TOKEN_ENV = "IFOOD_API_TOKEN"
+MCP_TOKEN_ENV = "IFOOD_MCP_TOKEN"
 
 
 def _expected_token() -> str:
@@ -37,8 +41,21 @@ async def require_token(request: Request) -> None:
 
 
 def build_app() -> FastAPI:
-    app = FastAPI(title="ifood-sdk", version="0.1.0", docs_url=None, redoc_url=None)
+    mcp_token = os.environ.get(MCP_TOKEN_ENV, _expected_token())
+    mcp_app = mcp_asgi.build_app(token=mcp_token, streamable_http_path="/")
+
+    @asynccontextmanager
+    async def lifespan(_: FastAPI) -> AsyncGenerator[None]:
+        # Starlette mounts get no lifespan of their own; run the MCP session
+        # manager's startup and shutdown alongside the REST app's.
+        async with mcp_app.router.lifespan_context(mcp_app):
+            yield
+
+    app = FastAPI(
+        title="ifood-sdk", version="0.1.0", docs_url=None, redoc_url=None, lifespan=lifespan
+    )
     guarded = [Depends(require_token)]
+    app.mount("/mcp", mcp_app)
 
     @app.get("/health")
     def health() -> dict[str, Any]:
@@ -95,6 +112,21 @@ def build_app() -> FastAPI:
     @app.post("/orders/{order_id}/repeat", dependencies=guarded)
     def repeat_order(order_id: str) -> dict[str, Any]:
         return ops.repeat_order(order_id)
+
+    @app.get("/vouchers", dependencies=guarded)
+    def list_vouchers(
+        latitude: float, longitude: float, distance_km: float = 10.0
+    ) -> dict[str, Any]:
+        return ops.list_vouchers(latitude=latitude, longitude=longitude, distance_km=distance_km)
+
+    @app.put("/carts/{cart_id}/voucher", dependencies=guarded)
+    def apply_voucher(
+        cart_id: str,
+        token: str,
+        code: str | None = None,
+        campaign_id: str | None = None,
+    ) -> dict[str, Any]:
+        return ops.apply_voucher(cart_id, token, code=code, campaign_id=campaign_id)
 
     @app.exception_handler(IfoodError)
     async def _ifood_error(_: Request, error: IfoodError) -> JSONResponse:

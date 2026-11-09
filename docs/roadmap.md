@@ -21,8 +21,8 @@
 | Voucher wallet | `client.vouchers.list(latitude=, longitude=)` |
 | Voucher apply | `client.vouchers.apply_to_cart(cart_id, token=, code= or campaign_id=)` |
 | Checkout | `client.carts.place_order(cart_id, cpf_cnpj=...)` |
-| MCP server | `python -m ifood.mcp`, fourteen tools |
-| HTTP service | `uvicorn ifood.api:build_app --factory`, bearer token |
+| MCP server | `python -m ifood.mcp` or streamable HTTP at `/mcp`, sixteen tools |
+| HTTP service | `uvicorn ifood.api:build_app --factory`, REST plus MCP at `/mcp` |
 
 ## Not covered
 

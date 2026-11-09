@@ -64,11 +64,18 @@ print(order.number, order.status, order.merchant.name, order.delivery_code)
 
 ```bash
 python -m ifood.mcp                                          # agent tools over stdio
-uvicorn ifood.api:build_app --factory --port 8000            # HTTP service with bearer
+uvicorn ifood.api:build_app --factory --port 8000            # REST and MCP in one process
+uvicorn ifood.mcp.asgi:build_app --factory --port 8001       # MCP only, streamable HTTP
 ```
 
+The first runs over stdio, the way a local MCP host launches it. The other two speak
+Streamable HTTP: the REST service mounts the MCP server at `/mcp`, so one process serves
+the REST routes and the agent tools, and `ifood.mcp.asgi` serves only the MCP endpoint.
+Both need a bearer token: `IFOOD_API_TOKEN` for the REST routes, and `IFOOD_MCP_TOKEN`
+for `/mcp`, which defaults to the API token when unset.
+
 The MCP server and the HTTP service call the same operations from `ifood/ops.py`, so a fix
-lands in both. The HTTP surfaces need a token: `IFOOD_MCP_TOKEN` and `IFOOD_API_TOKEN`.
+lands in both.
 
 ## What it does not do
 

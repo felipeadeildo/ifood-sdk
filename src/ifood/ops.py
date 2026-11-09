@@ -7,6 +7,7 @@ decides how to present it. Every operation reads the session at call time.
 from typing import Any
 
 from . import runtime
+from .types import as_object
 
 
 def session_status() -> dict[str, Any]:
@@ -111,3 +112,41 @@ def place_order(cart_id: str, cpf_cnpj: str) -> dict[str, Any]:
         "status": detail.status,
         "number": detail.number,
     }
+
+
+def list_vouchers(
+    *, latitude: float, longitude: float, distance_km: float = 10.0
+) -> dict[str, Any]:
+    """The voucher wallet, with the benefitsToken needed to apply one."""
+    client = runtime.get_client()
+    wallet = client.vouchers.wallet(latitude=latitude, longitude=longitude, distance_km=distance_km)
+    raw_wallet = wallet.get("vouchers")
+    raw_list = raw_wallet if isinstance(raw_wallet, list) else []
+    vouchers = []
+    for raw in raw_list:
+        if not isinstance(raw, dict):
+            continue
+        campaign_raw = raw.get("campaign")
+        campaign = as_object(campaign_raw) if isinstance(campaign_raw, dict) else {}
+        vouchers.append(
+            {
+                "code": raw.get("code"),
+                "status": raw.get("status"),
+                "campaign_id": campaign.get("id"),
+                "campaign_code": campaign.get("code"),
+                "description": campaign.get("promoShortDescription"),
+            }
+        )
+    return {"benefits_token": wallet.get("benefitsToken"), "vouchers": vouchers}
+
+
+def apply_voucher(
+    cart_id: str, token: str, *, code: str | None = None, campaign_id: str | None = None
+) -> dict[str, Any]:
+    """Apply one voucher to the cart and return the discounted cart.
+
+    `token` comes from `list_vouchers` and rotates per call, so list and apply
+    must be close together.
+    """
+    client = runtime.get_client()
+    return client.vouchers.apply_to_cart(cart_id, token=token, code=code, campaign_id=campaign_id)
