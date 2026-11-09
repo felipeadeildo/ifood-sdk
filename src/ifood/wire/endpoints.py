@@ -21,9 +21,7 @@ ORDER_DETAIL = "/v3/customers/me/orders/{order_id}"
 ORDER_EVENTS = "/v1/customers/me/orders/{order_id}/events"
 ORDER_REORDER = "/v1/customers/me/orders/{order_id}/reorder"
 
-# wallet (measured: real 200 bodies in research/evidence/cart-01). The response carries
-# `vouchers`, `benefitsToken`, `limit` and `total`; with `merchantId` the captured bodies
-# were byte-identical to the unscoped ones, so the filter appears to be client-side.
+# wallet (measured). The merchantId param did not change captured bodies; filter locally.
 WALLET_BENEFITS = "/v3/customers/me/wallet/benefits"
 
 # cart (measured; writes require a browser-originated session)
@@ -32,12 +30,8 @@ CART_BY_ID = "/v2/carts/{cart_id}"
 CART_CHECKOUT = "/v2/carts/{cart_id}/checkout"
 CART_ITEM = "/v2/carts/{cart_id}/items/{item_id}"
 CART_PAYMENT_METHOD = "/v2/carts/{cart_id}/paymentMethod"
-# Apply is measured: `PUT` with `{"token": <benefitsToken>, "code": <voucher code>}`
-# (manual coupon) or `{"token": <benefitsToken>, "campaignId": <campaign id>}`
-# (wallet voucher). The token comes from the preceding wallet/benefits call and
-# rotates per call. The 200 body is the signed cart response. Remove (DELETE) is
-# still unobserved. Evidence: ~/Downloads/hars/adicionando cartao e aplicando voucher.har
-# and tests/fixtures/voucher_apply_contract.json.
+# Apply is measured: body is {token, code} or {token, campaignId}; token comes from
+# the preceding wallet/benefits call and rotates per call. DELETE never observed.
 CART_VOUCHER = "/v2/carts/{cart_id}/voucher"  # current flow, same base as the cart
 CART_VOUCHER_LEGACY = "/v1/carts/{cart_id}/voucher"  # WSV3 base, bundle only
 

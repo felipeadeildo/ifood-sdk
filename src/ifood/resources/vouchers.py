@@ -1,17 +1,4 @@
-"""Vouchers and coupons.
-
-Both routes are measured against the live web app:
-
-- `GET /site-api/v3/customers/me/wallet/benefits` lists the wallet and returns a
-  `benefitsToken` that rotates per call.
-- `PUT /site-api/v2/carts/{cart_id}/voucher` applies one voucher, carrying that
-  `benefitsToken` plus either the voucher `code` (manual coupon) or the
-  `campaignId` (wallet voucher). The 200 body is the signed cart response with
-  the discount applied.
-
-`remove_from_cart` (`DELETE`) has no captured request yet: the shape below is
-inferred and must be probed before being relied on.
-"""
+"""Vouchers and coupons. Measured: wallet listing and cart apply; DELETE is inferred."""
 
 from collections.abc import Sequence
 
@@ -32,13 +19,9 @@ class Vouchers:
         distance_km: float = 10.0,
         merchant_id: str | None = None,
     ) -> JsonObject:
-        """The raw wallet payload: `vouchers`, `benefitsToken`, `limit`, `total`.
+        """Raw wallet payload: `vouchers`, `benefitsToken`, `limit`, `total`.
 
-        The token rotates per call, so this is the one to use right before
-        `apply_to_cart`. Each voucher carries `code`, `status`,
-        `campaign.conditions` and `campaign.effects`. `merchant_id` is passed
-        through, but captured bodies with and without it were identical; filter
-        locally with `available_for` when in doubt.
+        The token rotates per call; use it right before `apply_to_cart`.
         """
         params: dict[str, str | float] = {
             "lat": latitude,
@@ -57,7 +40,7 @@ class Vouchers:
         distance_km: float = 10.0,
         merchant_id: str | None = None,
     ) -> list[JsonObject]:
-        """The vouchers from `wallet`, ready to filter with `available_for`."""
+        """Vouchers from `wallet`, ready to filter with `available_for`."""
         vouchers = self.wallet(
             latitude=latitude,
             longitude=longitude,
@@ -68,7 +51,7 @@ class Vouchers:
 
     @staticmethod
     def available_for(vouchers: Sequence[JsonObject], merchant_id: str) -> list[JsonObject]:
-        """Local filter by the `MERCHANT` condition and `AVAILABLE` status."""
+        """Keep `AVAILABLE` vouchers not restricted to another merchant."""
         out = []
         for voucher in vouchers:
             if voucher.get("status") != "AVAILABLE":
@@ -93,12 +76,10 @@ class Vouchers:
         code: str | None = None,
         campaign_id: str | None = None,
     ) -> JsonObject:
-        """Apply a voucher to the cart.
+        """Apply one voucher; returns the signed cart with the discount applied.
 
-        `token` is the `benefitsToken` from a recent `list()` call; it rotates,
-        so list and apply must happen close together. Give `code` for a manual
-        coupon or `campaign_id` for a wallet voucher. Returns the signed cart
-        response with the discount applied.
+        `token` is a fresh `benefitsToken` from `wallet`. Pass `code=` (typed
+        coupon) or `campaign_id=` (wallet voucher), never both.
         """
         if (code is None) == (campaign_id is None):
             raise ValueError("exactly one of code= or campaign_id= is required")
@@ -114,4 +95,5 @@ class Vouchers:
         )
 
     def remove_from_cart(self, cart_id: str) -> None:
+        """DELETE on the same route; never observed on the wire."""
         self._t.request("DELETE", endpoints.CART_VOUCHER.format(cart_id=cart_id))
