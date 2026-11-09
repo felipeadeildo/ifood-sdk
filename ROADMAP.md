@@ -15,6 +15,7 @@
 | Delivery code | `order.delivery_code` | four digits for the courier |
 | Reorder | `client.orders.reorder(order, latitude=…, longitude=…)` | previous bag |
 | Cart payload | `client.carts.build(merchant_id=…, …)` | validated, no network |
+| Voucher wallet | `client.vouchers.wallet(...)` and `.apply_to_cart(...)` | measured on the wire |
 | MCP server | `uv run python -m ifood.mcp` | seven tools, stdio or HTTP |
 | HTTP service | `uvicorn ifood.api:build_app --factory` | seven routes, bearer token |
 
@@ -26,7 +27,6 @@
 | Checkout | same | same |
 | Menu | PerimeterX | browser-originated session |
 | Search | PerimeterX | browser-originated session |
-| Voucher listing | no measured route | a capture of the voucher wallet |
 
 ## Next
 

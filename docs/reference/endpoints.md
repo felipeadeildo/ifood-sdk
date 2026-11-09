@@ -46,8 +46,25 @@ grouped into sections, and stays behind PerimeterX.
 | `/v2/carts/{id}` | GET | measured |
 | `/v2/carts/{id}/items/{itemId}` | PUT | measured |
 | `/v2/carts/{id}/paymentMethod` | PUT | measured |
-| `/v2/carts/{id}/voucher` | PUT | bundle |
+| `/v2/carts/{id}/voucher` | PUT | measured |
 | `/v2/carts/{id}/checkout` | POST | measured |
+
+Applying a voucher takes two calls. The wallet listing returns a `benefitsToken`, and
+the apply body carries it back with either the voucher `code` (a typed coupon) or the
+`campaignId` (a wallet voucher). The token rotates per listing call, so list and apply
+must happen close together. The 200 body is the signed cart response, with the discount
+already in `summary.benefits` and `summary.discounts`.
+
+## Wallet
+
+| Route | Method | Status |
+|---|---|---|
+| `/v3/customers/me/wallet/benefits?lat&lon&distanceInKm[&merchantId]` | GET | measured |
+
+The response carries `vouchers`, `benefitsToken`, `limit` and `total`. Each voucher
+holds `code`, `status`, `campaign.conditions` (merchant, order value, payment type)
+and `campaign.effects`. Pass `merchantId` and the body stays the same: the captured
+responses with and without the parameter were identical, so filter locally.
 
 ## Orders
 

@@ -53,6 +53,44 @@ client.carts.remove_voucher(cart_id)
 
 The payment method id comes from the cart snapshot, not from a fixed list.
 
+## Vouchers
+
+Two calls apply a coupon. The first reads the wallet and gets a token; the second
+applies one voucher to the cart:
+
+```python
+wallet = client.vouchers.wallet(latitude=-23.56, longitude=-46.65)
+cart = client.vouchers.apply_to_cart(
+    cart_id,
+    token=wallet["benefitsToken"],
+    code="54F10FFE97747ADBEFF97E38DCE163D",   # a typed coupon
+)
+```
+
+The token changes every listing call, so keep the two calls close together in time.
+For a voucher picked from the wallet instead of a typed code, pass `campaign_id=` with
+the voucher's `campaign.id`:
+
+```python
+vouchers = client.vouchers.list(latitude=-23.56, longitude=-46.65)
+picked = client.vouchers.available_for(vouchers, merchant_id)[0]
+cart = client.vouchers.apply_to_cart(
+    cart_id, token=wallet["benefitsToken"], campaign_id=picked["campaign"]["id"]
+)
+```
+
+Both shapes return the signed cart response, with the discount already inside
+`data.summary.benefits` and `data.summary.discounts`.
+
+The discount survives a card payment. One measured order paid by Mastercard kept
+`voucherTotal: 8.10` and charged the discounted total: the voucher conditions list the
+payment methods it accepts (`campaign.conditions`, type `ORDER_PAYMENT_METHOD`), and
+credit is usually among them. The checkout body itself carries no voucher field; the
+discount lives in the cart and the payment amount comes discounted.
+
+`remove_from_cart` sends `DELETE` to the same route. No capture shows that call, so
+treat it as a guess until a live run proves it.
+
 ## Read back
 
 ```python

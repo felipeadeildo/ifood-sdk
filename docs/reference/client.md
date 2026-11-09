@@ -31,7 +31,7 @@ The code expires in 60 seconds and its key works once. `Client(phone=...)` accep
 | `client.orders` | `recent(size=5)`, `list(page, size)`, `get(id)`, `events(id)`, `reorder(order, latitude=, longitude=)`, `delivery_code(order)` |
 | `client.merchants` | `get(id)`, `items(id, latitude=, longitude=)` |
 | `client.carts` | `build(...)`, `create(payload)`, `set_payment_method`, `apply_voucher`, `remove_voucher`, `checkout(cart_id, payload)` |
-| `client.vouchers` | `apply_to_cart`, `remove_from_cart` |
+| `client.vouchers` | `wallet(...)`, `list()`, `available_for()`, `apply_to_cart(cart_id, token=, code= or campaign_id=)`, `remove_from_cart` |
 
 `recent`, `reorder` and `delivery_code` accept the `Order` object or its id.
 

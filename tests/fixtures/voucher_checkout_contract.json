@@ -1,0 +1,93 @@
+{
+ "checkout_request_keys": [
+  "paymentSources",
+  "cpfCnpj",
+  "signature",
+  "cartRequest"
+ ],
+ "payment_source": {
+  "source": "CARD_TOKEN",
+  "amount": {
+   "value": 25.29,
+   "currency": "BRL"
+  },
+  "cardToken": {
+   "id": "7a547187-981c-4e6b-b3af-2ed47e93b31c",
+   "bin": "52343118",
+   "last_four_digits": "0379",
+   "issuer": {
+    "code": "341",
+    "name": "Itau Unibanco"
+   }
+  }
+ },
+ "cpfCnpj": "***",
+ "signature": "MEUCIBlga5/wb/3ApUQn...",
+ "checkout_response": {
+  "orderId": "f403718a-f349-454c-8b0e-6060b5ccf85e",
+  "summary": {
+   "total": 25.29,
+   "subTotal": 32.4,
+   "grossSubTotal": 32.4,
+   "deliveryFee": 0.0,
+   "originalDeliveryFee": 6.99,
+   "feeTotal": 0.99,
+   "benefitsTotal": 6.99,
+   "voucherTotal": 8.1,
+   "loyaltyTotal": 0.0,
+   "interestTotal": 0.0,
+   "totalWithInterest": 25.29,
+   "interestType": "PCJ",
+   "benefits": [
+    {
+     "type": "CLUBE",
+     "value": 8.1
+    },
+    {
+     "type": "DELIVERY_FEE",
+     "value": 6.99
+    },
+    {
+     "type": "CLUB_VOUCHER",
+     "value": 8.1
+    }
+   ],
+   "missions": null
+  },
+  "voucher": {
+   "campaignId": "7d59d493-5183-4b18-8531-e6a5fb7a26f2",
+   "campaignCode": "CLUBE_IFOOD_SUPEEST_CI_2210",
+   "code": null,
+   "token": "MmY5YjI1MzktNWIzZC00NjcwLTkwZGYtODgxNDA2ZTQ4NWI1",
+   "scope": "CART",
+   "amount": 8.1,
+   "isClub": true
+  }
+ },
+ "order_bag_benefits": [
+  {
+   "type": "VOUCHER",
+   "target": "CART",
+   "targetId": "$.bag.subTotal.value",
+   "description": "7d59d493-5183-4b18-8531-e6a5fb7a26f2",
+   "value": 810,
+   "experienceType": "CLUB_LIGHT"
+  },
+  {
+   "type": "MERCHANT_TAG",
+   "target": "DELIVERY_FEE",
+   "targetId": "$.bag.deliveryFee.value",
+   "description": "CART::MCHT::FD_DESPENT_D8C13",
+   "value": 699,
+   "experienceType": "DEFAULT"
+  }
+ ],
+ "order_total": {
+  "value": 3939,
+  "valueWithDiscount": 2529
+ },
+ "payment_total": {
+  "currency": "BRL",
+  "value": 2529
+ }
+}
