@@ -3,17 +3,21 @@ name = "ifood-sdk"
 version = "0.1.0"
 description = "Unofficial Python client for the iFood consumer API"
 requires-python = ">=3.14"
-dependencies = ["httpx", "pydantic", "pydantic-settings"]
+dependencies = [
+    "httpx>=0.28.1,<0.29",
+    "pydantic>=2.14.1,<3",
+    "pydantic-settings>=2.16.0,<3",
+]
 
 [project.optional-dependencies]
-mcp = ["mcp"]
-api = ["fastapi", "uvicorn"]
+mcp = ["mcp>=2.3.0,<3"]
+api = ["fastapi>=0.146.0,<1", "uvicorn>=0.54.0,<1"]
 
 [dependency-groups]
-dev = ["ruff", "ty", "pytest", "zensical", "prek"]
+dev = ["ruff==0.17.1", "ty==0.0.89", "pytest==9.1.1", "zensical==0.0.71", "prek==0.5.5"]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.26,<2"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
