@@ -2,7 +2,7 @@
 
 from collections.abc import Sequence
 
-from ..types import JsonObject, as_object
+from ..types import JsonObject, as_list, as_object
 from ..wire import endpoints
 from ..wire.transport import Transport
 
@@ -39,7 +39,7 @@ class Vouchers:
         longitude: float,
         distance_km: float = 10.0,
         merchant_id: str | None = None,
-    ) -> list[JsonObject]:
+    ) -> Sequence[JsonObject]:
         """Vouchers from `wallet`, ready to filter with `available_for`."""
         vouchers = self.wallet(
             latitude=latitude,
@@ -50,20 +50,18 @@ class Vouchers:
         return [as_object(item) for item in vouchers] if isinstance(vouchers, list) else []
 
     @staticmethod
-    def available_for(vouchers: Sequence[JsonObject], merchant_id: str) -> list[JsonObject]:
+    def available_for(vouchers: Sequence[JsonObject], merchant_id: str) -> Sequence[JsonObject]:
         """Keep `AVAILABLE` vouchers not restricted to another merchant."""
-        out = []
+        out: list[JsonObject] = []
         for voucher in vouchers:
             if voucher.get("status") != "AVAILABLE":
                 continue
-            campaign = voucher.get("campaign") or {}
-            conditions = campaign.get("conditions") or []
-            allowed = [
-                condition.get("value")
-                for condition in conditions
-                if condition.get("type") == "MERCHANT"
+            campaign = as_object(voucher.get("campaign") or {})
+            conditions = [as_object(c) for c in as_list(campaign.get("conditions") or [])]
+            merchant_only = [
+                as_list(c.get("value") or []) for c in conditions if c.get("type") == "MERCHANT"
             ]
-            if allowed and merchant_id not in (allowed[0] or []):
+            if merchant_only and merchant_id not in (merchant_only[0] or []):
                 continue
             out.append(voucher)
         return out
